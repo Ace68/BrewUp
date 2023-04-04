@@ -19,7 +19,6 @@ public class PurchaseModule : IModule
 			.WithTags("Purchases");
 
 		mapGroup.MapPost("", PurchasesEndpoints.HandleAddOrder)
-			.Produces<string>()
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("AddOrder");
 	}

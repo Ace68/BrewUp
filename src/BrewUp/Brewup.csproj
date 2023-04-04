@@ -30,4 +30,8 @@
 	  <ProjectReference Include="..\Brewup.Modules.Purchases\Brewup.Modules.Purchases.csproj" />
 	</ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Brewup.Tests" />
+  </ItemGroup>
+
 </Project>

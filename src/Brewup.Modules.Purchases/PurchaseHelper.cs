@@ -15,6 +15,7 @@ public static class PurchaseHelper
 		services.AddValidatorsFromAssemblyContaining<OrderValidator>();
 
 		services.AddSingleton<IPurchaseService, PurchaseService>();
+		services.AddSingleton<IPurchaseOrchestrator, PurchaseOrchestrator>();
 
 		return services;
 	}
