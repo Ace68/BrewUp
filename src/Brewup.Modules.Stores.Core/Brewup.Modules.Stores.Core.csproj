@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstracts\" />
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Muflone" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Brewup.Modules.Stores.Shared\Brewup.Modules.Stores.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

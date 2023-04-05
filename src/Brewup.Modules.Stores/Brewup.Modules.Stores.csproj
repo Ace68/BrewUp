@@ -7,16 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Abstracts\" />
-    <Folder Include="Concretes\" />
     <Folder Include="Endpoint\" />
-    <Folder Include="Dtos\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
   </ItemGroup>
 
 </Project>
