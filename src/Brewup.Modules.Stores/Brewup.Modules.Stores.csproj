@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Brewup.Modules.Stores.Shared\Brewup.Modules.Stores.Shared.csproj" />
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
   </ItemGroup>
 

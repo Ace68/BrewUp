@@ -1,4 +1,4 @@
-﻿namespace Brewup.Modules.Stores.Dtos;
+﻿namespace Brewup.Modules.Stores.Shared.Dtos;
 
 public record DeliveryOrderRow(string RowId,
 	string RowNumber,

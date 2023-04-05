@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Stores.Dtos;
+﻿using Brewup.Modules.Stores.Shared.Dtos;
 
 namespace Brewup.Modules.Stores.Abstracts;
 
