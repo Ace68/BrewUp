@@ -1,6 +1,6 @@
 ﻿namespace Brewup.Modules.Purchases.Dtos;
 
-public class Order
+public class PurchaseOrder
 {
 	public string OrderId { get; set; } = string.Empty;
 	public string OrderNumber { get; set; } = string.Empty;
@@ -8,5 +8,5 @@ public class Order
 	public string CustomerId { get; set; } = string.Empty;
 	public string CustomerName { get; set; } = string.Empty;
 	public double TotalAmount { get; set; } = 0;
-	public IEnumerable<OrderRow> Rows { get; set; } = Enumerable.Empty<OrderRow>();
+	public IEnumerable<PurchaseOrderRow> Rows { get; set; } = Enumerable.Empty<PurchaseOrderRow>();
 }

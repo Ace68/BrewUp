@@ -13,7 +13,7 @@ public sealed class PurchaseOrchestrator : IPurchaseOrchestrator
 		_purchaseLogger = new PurchaseLogger(loggerFactory);
 	}
 
-	public Task<string> AddOrderAsync(Order orderToAdd, CancellationToken cancellationToken)
+	public Task<string> AddOrderAsync(PurchaseOrder orderToAdd, CancellationToken cancellationToken)
 	{
 		try
 		{

@@ -12,7 +12,7 @@ public static class PurchaseHelper
 	public static IServiceCollection AddPurchaseModule(this IServiceCollection services)
 	{
 		services.AddFluentValidationAutoValidation();
-		services.AddValidatorsFromAssemblyContaining<OrderValidator>();
+		services.AddValidatorsFromAssemblyContaining<PurchaseOrderValidator>();
 
 		services.AddSingleton<IPurchaseService, PurchaseService>();
 		services.AddSingleton<IPurchaseOrchestrator, PurchaseOrchestrator>();

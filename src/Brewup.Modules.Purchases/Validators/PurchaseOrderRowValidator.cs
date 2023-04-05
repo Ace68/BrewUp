@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Brewup.Modules.Purchases.Validators;
 
-public class OrderRowValidator : AbstractValidator<OrderRow>
+public class PurchaseOrderRowValidator : AbstractValidator<PurchaseOrderRow>
 {
-	public OrderRowValidator()
+	public PurchaseOrderRowValidator()
 	{
 		RuleFor(v => v.BeerId).NotNull().NotEmpty().WithMessage("BeerId is mandatory!");
 		RuleFor(v => v.BeerName).NotNull().NotEmpty().WithMessage("BeerName is mandatory!");

@@ -1,6 +1,6 @@
 ﻿namespace Brewup.Modules.Purchases.Dtos;
 
-public class OrderRow
+public class PurchaseOrderRow
 {
 	public string RowId { get; set; } = string.Empty;
 	public string RowNumber { get; set; } = string.Empty;

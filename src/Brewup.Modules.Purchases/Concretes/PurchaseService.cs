@@ -13,7 +13,7 @@ public sealed class PurchaseService : IPurchaseService
 		BaseService = new PurchaseBaseService(loggerFactory);
 	}
 
-	public Task<string> AddOrderAsync(Order orderToAdd, CancellationToken cancellationToken)
+	public Task<string> AddOrderAsync(PurchaseOrder orderToAdd, CancellationToken cancellationToken)
 	{
 		throw new NotImplementedException();
 	}

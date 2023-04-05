@@ -2,7 +2,7 @@
 
 namespace Brewup.Modules.Purchases.Abstracts;
 
-public class PurchaseLogger
+public sealed class PurchaseLogger
 {
 	public readonly ILogger Logger;
 
