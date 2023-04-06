@@ -1,4 +1,5 @@
-﻿using Brewup.Modules.Stores.Dtos;
+﻿using Brewup.Modules.Stores.Shared.Dtos;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -33,5 +34,22 @@ public class StoresModuleTest
 		var postResult = await _integrationFixture.Client.PostAsync("/v1/stores/availability", httpContent);
 
 		Assert.Equal(HttpStatusCode.BadRequest, postResult.StatusCode);
+	}
+
+	[Fact]
+	public async Task Should_Send_ValidJson()
+	{
+		var body = new SpareAvailability(Guid.NewGuid().ToString(),
+			0,
+			0,
+			0,
+			0,
+			0);
+
+		var stringJson = JsonSerializer.Serialize(body);
+		var httpContent = new StringContent(stringJson, Encoding.UTF8, "application/json");
+		var postResult = await _integrationFixture.Client.PostAsync("/v1/stores/availability", httpContent);
+
+		Assert.Equal(HttpStatusCode.Accepted, postResult.StatusCode);
 	}
 }

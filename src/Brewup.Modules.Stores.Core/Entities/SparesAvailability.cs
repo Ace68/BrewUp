@@ -1,34 +1,52 @@
-﻿using Brewup.Modules.Stores.Shared.ValueObjects;
+﻿using Brewup.Modules.Stores.Shared.DomainEvents;
+using Brewup.Modules.Stores.Shared.ValueObjects;
 using Muflone.Core;
 
 namespace Brewup.Modules.Stores.Core.Entities;
 
 public class SparesAvailability : AggregateRoot
 {
-	private readonly SpareId _spareId;
-	private readonly Stock _stock;
-	private readonly Availability _availability;
-	private readonly ProductionCommitted _productionCommitted;
-	private readonly SalesCommitted _salesCommitted;
-	private readonly SupplierOrdered _supplierOrdered;
+	private SpareId _spareId;
+	private Stock _stock;
+	private Availability _availability;
+	private ProductionCommitted _productionCommitted;
+	private SalesCommitted _salesCommitted;
+	private SupplierOrdered _supplierOrdered;
 
 	protected SparesAvailability()
-	{ }
-
-	#region constructor
-	internal static SparesAvailability CreateSparesAvailability(SpareId spareId)
 	{
-		return new SparesAvailability(spareId, new Stock(0), new Availability(0), new ProductionCommitted(0), new SalesCommitted(0), new SupplierOrdered(0));
 	}
 
-	private SparesAvailability(SpareId spareId, Stock stock, Availability availability, ProductionCommitted productionCommitted, SalesCommitted salesCommitted, SupplierOrdered supplierOrdered)
+	#region constructor
+	internal static SparesAvailability CreateSparesAvailability(SpareId spareId,
+		Stock stock,
+		Availability availability,
+		ProductionCommitted productionCommitted,
+		SalesCommitted salesCommitted,
+		SupplierOrdered supplierOrdered)
 	{
-		_spareId = spareId;
-		_stock = stock;
-		_availability = availability;
-		_productionCommitted = productionCommitted;
-		_salesCommitted = salesCommitted;
-		_supplierOrdered = supplierOrdered;
+		return new SparesAvailability(spareId,
+			stock,
+			availability, productionCommitted,
+			salesCommitted,
+			supplierOrdered);
+	}
+
+	private SparesAvailability(SpareId spareId, Stock stock, Availability availability,
+		ProductionCommitted productionCommitted, SalesCommitted salesCommitted, SupplierOrdered supplierOrdered)
+	{
+		RaiseEvent(new SpareAvailabilityCreated(spareId, stock, availability, productionCommitted, salesCommitted,
+			supplierOrdered));
+	}
+
+	private void Apply(SpareAvailabilityCreated @event)
+	{
+		_spareId = @event.SpareId;
+		_stock = @event.Stock;
+		_availability = @event.Availability;
+		_productionCommitted = @event.ProductionCommitted;
+		_salesCommitted = @event.SalesCommitted;
+		_supplierOrdered = @event.SupplierOrdered;
 	}
 	#endregion
 }

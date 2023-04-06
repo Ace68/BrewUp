@@ -20,8 +20,16 @@ public static class StoresEndpoints
 		if (!validationHandler.IsValid)
 			return Results.BadRequest(validationHandler.Errors);
 
-		await storesOrchestrator.CreateAvailabilityAsync(body, cancellationToken);
+		try
+		{
+			await storesOrchestrator.CreateAvailabilityAsync(body, cancellationToken);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+			throw;
+		}
 
-		return Results.Ok();
+		return Results.Accepted();
 	}
 }

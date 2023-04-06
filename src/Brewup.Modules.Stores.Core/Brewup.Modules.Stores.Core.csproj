@@ -10,10 +10,13 @@
     <Folder Include="Abstracts\" />
     <Folder Include="CommandHandlers\" />
     <Folder Include="Entities\" />
+    <Folder Include="Consumers\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Muflone" Version="6.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Muflone.Transport.InMemory" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
