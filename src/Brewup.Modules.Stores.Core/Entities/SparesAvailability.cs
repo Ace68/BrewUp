@@ -13,6 +13,9 @@ public class SparesAvailability : AggregateRoot
 	private SalesCommitted _salesCommitted;
 	private SupplierOrdered _supplierOrdered;
 
+	protected SparesAvailability()
+	{ }
+
 	#region constructor
 	internal static SparesAvailability CreateSparesAvailability(SpareId spareId,
 		Stock stock,
@@ -49,10 +52,14 @@ public class SparesAvailability : AggregateRoot
 	#endregion
 
 	#region availability
-	internal void CheckAvailability(SpareId spareId)
+	internal void CheckAvailability()
 	{
-		//var spareAvailability = GetSpareAvailability(spareId);
-		//spareAvailability.CheckAvailability();
+		RaiseEvent(new AvailabilityChecked(_spareId, _availability));
+	}
+
+	private void Apply(AvailabilityChecked @event)
+	{
+		// do nothing
 	}
 	#endregion
 }

@@ -18,6 +18,10 @@ public class StoresModule : IModule
 		var mapGroup = endpoints.MapGroup("v1/stores")
 			.WithTags("Stores");
 
+		mapGroup.MapPost("/beers", StoresEndpoints.HandleCreateBeer)
+			.Produces(StatusCodes.Status400BadRequest)
+			.WithName("CreateBeer");
+
 		mapGroup.MapPost("/availability", StoresEndpoints.HandleCreateAvailability)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("CreateAvailability");

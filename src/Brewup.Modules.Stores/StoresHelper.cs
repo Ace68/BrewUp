@@ -15,6 +15,7 @@ public static class StoresHelper
 		services.AddValidatorsFromAssemblyContaining<SpareAvailabilityValidator>();
 
 		services.AddScoped<ISparesAvailabilityService, SparesAvailabilityService>();
+		services.AddScoped<IBeerService, BeerService>();
 		services.AddScoped<IStoresOrchestrator, StoresOrchestrator>();
 
 		return services;

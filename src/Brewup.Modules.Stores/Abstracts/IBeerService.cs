@@ -2,9 +2,7 @@
 
 namespace Brewup.Modules.Stores.Abstracts;
 
-public interface IStoresOrchestrator
+public interface IBeerService
 {
 	Task<string> CreateBeerAsync(BeerJson beerToCreate, CancellationToken cancellationToken);
-
-	Task CreateAvailabilityAsync(SpareAvailabilityJson body, CancellationToken cancellationToken);
 }

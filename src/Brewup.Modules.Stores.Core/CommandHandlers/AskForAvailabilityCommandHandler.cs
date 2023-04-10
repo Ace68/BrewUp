@@ -18,6 +18,8 @@ public sealed class AskForAvailabilityCommandHandler : CommandHandlerAsync<AskFo
 		var sparesAvailability =
 			await Repository.GetByIdAsync<SparesAvailability>(command.SpareId.Value);
 
+		sparesAvailability.CheckAvailability();
 
+		await Repository.SaveAsync(sparesAvailability, Guid.NewGuid());
 	}
 }
