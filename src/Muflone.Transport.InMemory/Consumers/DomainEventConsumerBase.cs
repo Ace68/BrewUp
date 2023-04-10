@@ -24,7 +24,7 @@ public abstract class DomainEventConsumerBase<T> : IDomainEventConsumer<T>, IAsy
 
 	public Task StartAsync(CancellationToken cancellationToken = default)
 	{
-		MufloneBroker.DomainEvents.CollectionChanged += OnEventReceived;
+		MufloneBroker.Events.CollectionChanged += OnEventReceived;
 
 		return Task.CompletedTask;
 	}
@@ -60,7 +60,6 @@ public abstract class DomainEventConsumerBase<T> : IDomainEventConsumer<T>, IAsy
 				if (item is T message)
 				{
 					Task.Run(async () => await ConsumeAsync(message));
-					MufloneBroker.DomainEvents.Remove(message);
 				}
 			}
 		}

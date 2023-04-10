@@ -24,7 +24,7 @@ public abstract class IntegrationEventConsumerBase<T> : IIntegrationEventConsume
 
 	public Task StartAsync(CancellationToken cancellationToken = default)
 	{
-		MufloneBroker.IntegrationEvents.CollectionChanged += OnEventReceived;
+		MufloneBroker.Events.CollectionChanged += OnEventReceived;
 
 		return Task.CompletedTask;
 	}
@@ -60,7 +60,6 @@ public abstract class IntegrationEventConsumerBase<T> : IIntegrationEventConsume
 				if (item is T message)
 				{
 					Task.Run(async () => await ConsumeAsync(message));
-					MufloneBroker.IntegrationEvents.Remove(message);
 				}
 			}
 		}

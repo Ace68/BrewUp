@@ -5,7 +5,7 @@ using Muflone.Messages.Commands;
 using Muflone.Persistence;
 using Muflone.Transport.InMemory.Consumers;
 
-namespace Brewup.Modules.Stores.Core.Consumers;
+namespace Brewup.Infrastructure.Muflone.Consumers;
 
 public sealed class CreateSpareAvailabilityConsumer : CommandConsumerBase<CreateSpareAvailability>
 {

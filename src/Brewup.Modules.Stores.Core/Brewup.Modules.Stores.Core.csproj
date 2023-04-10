@@ -18,7 +18,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Brewup.Infrastructure.ReadModel\Brewup.Infrastructure.ReadModel.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Stores.Shared\Brewup.Modules.Stores.Shared.csproj" />
-    <ProjectReference Include="..\Muflone.Transport.InMemory\Muflone.Transport.InMemory.csproj" />
   </ItemGroup>
 
 </Project>

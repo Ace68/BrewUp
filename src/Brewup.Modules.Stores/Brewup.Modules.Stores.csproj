@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Endpoint\" />
+    <Folder Include="EventsHandler\" />
     <Folder Include="Validators\" />
   </ItemGroup>
 
@@ -21,7 +22,6 @@
     <ProjectReference Include="..\Brewup.Infrastructure.ReadModel\Brewup.Infrastructure.ReadModel.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Stores.Shared\Brewup.Modules.Stores.Shared.csproj" />
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
-    <ProjectReference Include="..\Muflone.Transport.InMemory\Muflone.Transport.InMemory.csproj" />
   </ItemGroup>
 
 </Project>

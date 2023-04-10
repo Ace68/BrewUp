@@ -65,7 +65,6 @@ public abstract class CommandConsumerBase<T> : ICommandConsumer<T>, IAsyncDispos
 				if (item is T message)
 				{
 					Task.Run(async () => await ConsumeAsync(message));
-					MufloneBroker.Commands.Remove(message);
 				}
 			}
 		}

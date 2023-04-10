@@ -37,6 +37,8 @@ public class SparesAvailability : AggregateRoot
 
 	private void Apply(SparesAvailabilityCreated @event)
 	{
+		Id = @event.AggregateId;
+
 		_spareId = @event.SpareId;
 		_stock = @event.Stock;
 		_availability = @event.Availability;

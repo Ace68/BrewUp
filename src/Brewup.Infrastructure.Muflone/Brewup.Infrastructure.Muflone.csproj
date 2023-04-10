@@ -9,12 +9,13 @@
   <ItemGroup>
     <PackageReference Include="Muflone" Version="6.1.1" />
     <PackageReference Include="Muflone.Eventstore" Version="6.1.1" />
+    <PackageReference Include="Muflone.Transport.InMemory" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Brewup.Modules.Stores.Core\Brewup.Modules.Stores.Core.csproj" />
+    <ProjectReference Include="..\Brewup.Modules.Stores\Brewup.Modules.Stores.csproj" />
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
-    <ProjectReference Include="..\Muflone.Transport.InMemory\Muflone.Transport.InMemory.csproj" />
   </ItemGroup>
 
 </Project>
