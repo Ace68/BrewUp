@@ -3,7 +3,7 @@ using Muflone.Messages.Events;
 
 namespace Brewup.Modules.Stores.Shared.DomainEvents;
 
-public class SpareAvailabilityCreated : DomainEvent
+public class SparesAvailabilityCreated : DomainEvent
 {
 	public readonly SpareId SpareId;
 	public readonly Stock Stock;
@@ -12,7 +12,7 @@ public class SpareAvailabilityCreated : DomainEvent
 	public readonly SalesCommitted SalesCommitted;
 	public readonly SupplierOrdered SupplierOrdered;
 
-	public SpareAvailabilityCreated(SpareId aggregateId,
+	public SparesAvailabilityCreated(SpareId aggregateId,
 		Stock stock,
 		Availability availability,
 		ProductionCommitted productionCommitted,

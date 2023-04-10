@@ -15,13 +15,18 @@ public sealed class CreateSpareAvailabilityCommandHandler : CommandHandlerAsync<
 
 	public override async Task HandleAsync(CreateSpareAvailability command, CancellationToken cancellationToken = new())
 	{
-		var spareAvailability = SparesAvailability.CreateSparesAvailability(command.SpareId,
-			command.Stock,
-			command.Availability,
-			command.ProductionCommitted,
-			command.SalesCommitted,
-			command.SupplierOrdered);
+		try
+		{
+			var sparesAvailability = SparesAvailability.CreateSparesAvailability(command.SpareId, command.Stock,
+				command.Availability, command.ProductionCommitted, command.SalesCommitted, command.SupplierOrdered);
 
-		await Repository.SaveAsync(spareAvailability, Guid.NewGuid());
+			await Repository.SaveAsync(sparesAvailability, Guid.NewGuid());
+		}
+		catch (Exception ex)
+		{
+			//TODO : raise event
+			Console.WriteLine(ex);
+			throw;
+		}
 	}
 }

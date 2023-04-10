@@ -1,4 +1,5 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
+using Brewup.Modules.Stores.Shared.Dtos;
 using Brewup.Modules.Stores.Shared.ValueObjects;
 
 namespace Brewup.Infrastructure.ReadModel.Models;
@@ -29,4 +30,6 @@ public class SparesAvailability : ModelBase
 		SalesCommitted = salesCommitted;
 		SupplierOrdered = supplierOrdered;
 	}
+
+	public SpareAvailabilityJson ToJson() => new(Id, Stock, Availability, ProductionCommitted, SalesCommitted, SupplierOrdered);
 }

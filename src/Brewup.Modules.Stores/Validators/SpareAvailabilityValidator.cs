@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Brewup.Modules.Stores.Validators;
 
-public class SpareAvailabilityValidator : AbstractValidator<SpareAvailability>
+public class SpareAvailabilityValidator : AbstractValidator<SpareAvailabilityJson>
 {
 	public SpareAvailabilityValidator()
 	{

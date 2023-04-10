@@ -22,7 +22,7 @@ public class StoresModuleTest
 	[Fact]
 	public async Task Cannot_Send_InvalidJson()
 	{
-		var body = new SpareAvailability(string.Empty,
+		var body = new SpareAvailabilityJson(string.Empty,
 			0,
 			0,
 			0,
@@ -39,11 +39,11 @@ public class StoresModuleTest
 	[Fact]
 	public async Task Should_Send_ValidJson()
 	{
-		var body = new SpareAvailability(Guid.NewGuid().ToString(),
-			0,
-			0,
-			0,
-			0,
+		var body = new SpareAvailabilityJson(Guid.NewGuid().ToString(),
+			100,
+			30,
+			50,
+			20,
 			0);
 
 		var stringJson = JsonSerializer.Serialize(body);

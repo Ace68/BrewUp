@@ -1,5 +1,4 @@
 ﻿using Brewup.Modules.Stores;
-using Brewup.Modules.Stores.Core;
 using Brewup.Modules.Stores.Endpoint;
 
 namespace Brewup.Modules;
@@ -12,7 +11,6 @@ public class StoresModule : IModule
 	public void RegisterModule(WebApplicationBuilder builder)
 	{
 		builder.Services.AddStoresModule();
-		builder.Services.AddStoresCoreModule();
 	}
 
 	public void MapEndpoints(IEndpointRouteBuilder endpoints)

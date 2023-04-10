@@ -1,6 +1,7 @@
 ﻿using Brewup.Infrastructure.Muflone;
 using Brewup.Infrastructure.ReadModel.MongoDb;
 using Brewup.Shared.Configuration;
+using Muflone.Eventstore;
 
 namespace Brewup.Modules;
 
@@ -13,7 +14,9 @@ public class InfrastructureModule : IModule
 	{
 		builder.Services.AddMongoDb(builder.Configuration.GetSection("BrewUp:MongoDbSettings").Get<MongoDbSettings>()!);
 		builder.Services.AddEventstoreMongoDb(builder.Configuration.GetSection("BrewUp:MongoDbSettings").Get<MongoDbSettings>()!);
-		builder.Services.AddMuflone(builder.Configuration.GetSection("BrewUp:EventStoreSettings").Get<EventStoreSettings>()!);
+
+		builder.Services.AddMufloneEventStore(builder.Configuration["BrewUp:EventStoreSettings:ConnectionString"]!);
+		builder.Services.AddMuflone();
 	}
 
 	public void MapEndpoints(IEndpointRouteBuilder endpoints)

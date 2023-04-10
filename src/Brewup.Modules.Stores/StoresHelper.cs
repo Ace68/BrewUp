@@ -14,7 +14,8 @@ public static class StoresHelper
 		services.AddFluentValidationAutoValidation();
 		services.AddValidatorsFromAssemblyContaining<SpareAvailabilityValidator>();
 
-		services.AddSingleton<IStoresOrchestrator, StoresOrchestrator>();
+		services.AddScoped<ISparesAvailabilityService, SparesAvailabilityService>();
+		services.AddScoped<IStoresOrchestrator, StoresOrchestrator>();
 
 		return services;
 	}

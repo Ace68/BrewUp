@@ -10,9 +10,9 @@ public static class StoresEndpoints
 {
 	public static async Task<IResult> HandleCreateAvailability(
 		IStoresOrchestrator storesOrchestrator,
-		IValidator<SpareAvailability> validator,
+		IValidator<SpareAvailabilityJson> validator,
 		ValidationHandler validationHandler,
-		SpareAvailability body,
+		SpareAvailabilityJson body,
 		CancellationToken cancellationToken
 	)
 	{

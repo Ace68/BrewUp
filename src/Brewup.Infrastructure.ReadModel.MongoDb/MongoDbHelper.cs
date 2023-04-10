@@ -20,7 +20,7 @@ public static class MongoDbHelper
 
 	public static IServiceCollection AddMongoDb(this IServiceCollection services, MongoDbSettings mongoDbParameter)
 	{
-		services.AddSingleton<IMongoClient>(provider => new MongoClient(mongoDbParameter.ConnectionString));
+		services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoDbParameter.ConnectionString));
 		services.AddScoped(provider =>
 			provider.GetService<IMongoClient>()
 				?.GetDatabase(mongoDbParameter.DatabaseName)

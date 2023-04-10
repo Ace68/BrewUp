@@ -18,7 +18,7 @@ public sealed class Persister : IPersister
 		_logger = loggerFactory.CreateLogger(GetType());
 	}
 
-	public async Task<T> GetByIdAsync<T>(string id) where T : ModelBase
+	public async Task<T> GetByIdAsync<T>(string id, CancellationToken cancellationToken) where T : ModelBase
 	{
 		try
 		{
@@ -36,7 +36,7 @@ public sealed class Persister : IPersister
 		}
 	}
 
-	public async Task InsertAsync<T>(T dtoToInsert) where T : ModelBase
+	public async Task InsertAsync<T>(T dtoToInsert, CancellationToken cancellationToken) where T : ModelBase
 	{
 		try
 		{
@@ -50,7 +50,7 @@ public sealed class Persister : IPersister
 		}
 	}
 
-	public async Task ReplaceAsync<T>(T dtoToUpdate) where T : ModelBase
+	public async Task ReplaceAsync<T>(T dtoToUpdate, CancellationToken cancellationToken) where T : ModelBase
 	{
 		try
 		{
@@ -64,7 +64,7 @@ public sealed class Persister : IPersister
 		}
 	}
 
-	public async Task UpdateOneAsync<T>(string id, Dictionary<string, object> propertiesToUpdate) where T : ModelBase
+	public async Task UpdateOneAsync<T>(string id, Dictionary<string, object> propertiesToUpdate, CancellationToken cancellationToken) where T : ModelBase
 	{
 		try
 		{
@@ -88,7 +88,7 @@ public sealed class Persister : IPersister
 		}
 	}
 
-	public async Task DeleteAsync<T>(string id) where T : ModelBase
+	public async Task DeleteAsync<T>(string id, CancellationToken cancellationToken) where T : ModelBase
 	{
 		try
 		{
@@ -103,7 +103,7 @@ public sealed class Persister : IPersister
 		}
 	}
 
-	public async Task DeleteManyAsync<T>(Expression<Func<T, bool>> filter) where T : ModelBase
+	public async Task DeleteManyAsync<T>(Expression<Func<T, bool>> filter, CancellationToken cancellationToken) where T : ModelBase
 	{
 		try
 		{

@@ -15,13 +15,13 @@
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-    <PackageReference Include="Muflone.Transport.InMemory" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Brewup.Infrastructure.ReadModel\Brewup.Infrastructure.ReadModel.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Stores.Shared\Brewup.Modules.Stores.Shared.csproj" />
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
+    <ProjectReference Include="..\Muflone.Transport.InMemory\Muflone.Transport.InMemory.csproj" />
   </ItemGroup>
 
 </Project>

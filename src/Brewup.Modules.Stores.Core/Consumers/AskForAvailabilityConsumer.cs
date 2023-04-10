@@ -7,13 +7,13 @@ using Muflone.Transport.InMemory.Consumers;
 
 namespace Brewup.Modules.Stores.Core.Consumers;
 
-public sealed class CreateSpareAvailabilityConsumer : CommandConsumerBase<CreateSpareAvailability>
+public sealed class AskForAvailabilityConsumer : CommandConsumerBase<AskForAvailability>
 {
-	protected override ICommandHandlerAsync<CreateSpareAvailability> HandlerAsync { get; }
+	protected override ICommandHandlerAsync<AskForAvailability> HandlerAsync { get; }
 
-	public CreateSpareAvailabilityConsumer(IRepository repository,
+	public AskForAvailabilityConsumer(IRepository repository,
 		ILoggerFactory loggerFactory) : base(loggerFactory)
 	{
-		HandlerAsync = new CreateSpareAvailabilityCommandHandler(repository, loggerFactory);
+		HandlerAsync = new AskForAvailabilityCommandHandler(repository, loggerFactory);
 	}
 }

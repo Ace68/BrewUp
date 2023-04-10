@@ -13,10 +13,6 @@ public class SparesAvailability : AggregateRoot
 	private SalesCommitted _salesCommitted;
 	private SupplierOrdered _supplierOrdered;
 
-	protected SparesAvailability()
-	{
-	}
-
 	#region constructor
 	internal static SparesAvailability CreateSparesAvailability(SpareId spareId,
 		Stock stock,
@@ -25,21 +21,21 @@ public class SparesAvailability : AggregateRoot
 		SalesCommitted salesCommitted,
 		SupplierOrdered supplierOrdered)
 	{
-		return new SparesAvailability(spareId,
-			stock,
-			availability, productionCommitted,
-			salesCommitted,
+		return new SparesAvailability(spareId, stock, availability, productionCommitted, salesCommitted,
 			supplierOrdered);
 	}
 
-	private SparesAvailability(SpareId spareId, Stock stock, Availability availability,
-		ProductionCommitted productionCommitted, SalesCommitted salesCommitted, SupplierOrdered supplierOrdered)
+	private SparesAvailability(SpareId spareId,
+		Stock stock,
+		Availability availability,
+		ProductionCommitted productionCommitted,
+		SalesCommitted salesCommitted,
+		SupplierOrdered supplierOrdered)
 	{
-		RaiseEvent(new SpareAvailabilityCreated(spareId, stock, availability, productionCommitted, salesCommitted,
-			supplierOrdered));
+		RaiseEvent(new SparesAvailabilityCreated(spareId, stock, availability, productionCommitted, salesCommitted, supplierOrdered));
 	}
 
-	private void Apply(SpareAvailabilityCreated @event)
+	private void Apply(SparesAvailabilityCreated @event)
 	{
 		_spareId = @event.SpareId;
 		_stock = @event.Stock;
@@ -47,6 +43,14 @@ public class SparesAvailability : AggregateRoot
 		_productionCommitted = @event.ProductionCommitted;
 		_salesCommitted = @event.SalesCommitted;
 		_supplierOrdered = @event.SupplierOrdered;
+	}
+	#endregion
+
+	#region availability
+	internal void CheckAvailability(SpareId spareId)
+	{
+		//var spareAvailability = GetSpareAvailability(spareId);
+		//spareAvailability.CheckAvailability();
 	}
 	#endregion
 }
