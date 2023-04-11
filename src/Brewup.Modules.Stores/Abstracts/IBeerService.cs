@@ -1,8 +1,8 @@
-﻿using Brewup.Modules.Stores.Shared.Dtos;
+﻿using Brewup.Modules.Stores.Shared.ValueObjects;
 
 namespace Brewup.Modules.Stores.Abstracts;
 
 public interface IBeerService
 {
-	Task<string> CreateBeerAsync(BeerJson beerToCreate, CancellationToken cancellationToken);
+	Task<string> CreateBeerAsync(BeerId beerId, BeerName beerName, CancellationToken cancellationToken);
 }

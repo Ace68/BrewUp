@@ -5,7 +5,7 @@ using Muflone.Messages.Commands;
 using Muflone.Persistence;
 using Muflone.Transport.InMemory.Consumers;
 
-namespace Brewup.Infrastructure.Muflone.Consumers;
+namespace Brewup.Infrastructure.Muflone.Consumers.Commands;
 
 public sealed class AskForAvailabilityConsumer : CommandConsumerBase<AskForAvailability>
 {

@@ -10,25 +10,29 @@ namespace Brewup.Modules.Stores.Concretes;
 
 public sealed class StoresOrchestrator : IStoresOrchestrator
 {
-	private readonly ISparesAvailabilityService _sparesAvailabilityService;
-	private readonly IBeerService _beerService;
 	private readonly IServiceBus _serviceBus;
 	private readonly ILogger _logger;
 
-	public StoresOrchestrator(ISparesAvailabilityService sparesAvailabilityService,
-		IBeerService beerService,
+	public StoresOrchestrator(
 		IServiceBus serviceBus,
 		ILoggerFactory loggerFactory)
 	{
-		_sparesAvailabilityService = sparesAvailabilityService ?? throw new ArgumentNullException(nameof(sparesAvailabilityService));
-		_beerService = beerService ?? throw new ArgumentNullException(nameof(beerService));
 		_serviceBus = serviceBus ?? throw new ArgumentNullException(nameof(serviceBus));
 
 		_logger = loggerFactory.CreateLogger(GetType());
 	}
 
-	public Task<string> CreateBeerAsync(BeerJson beerToCreate, CancellationToken cancellationToken) =>
-		_beerService.CreateBeerAsync(beerToCreate, cancellationToken);
+	public async Task<string> CreateBeerAsync(BeerJson beerToCreate, CancellationToken cancellationToken)
+	{
+		if (string.IsNullOrWhiteSpace(beerToCreate.BeerId))
+			beerToCreate.BeerId = Guid.NewGuid().ToString();
+
+		var createBeer = new CreateBeer(new BeerId(new Guid(beerToCreate.BeerId)),
+						new BeerName(beerToCreate.BeerName));
+		await _serviceBus.SendAsync(createBeer, cancellationToken);
+
+		return beerToCreate.BeerId;
+	}
 
 	public async Task CreateAvailabilityAsync(SpareAvailabilityJson body, CancellationToken cancellationToken)
 	{

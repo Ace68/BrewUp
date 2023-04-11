@@ -1,7 +1,6 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
 using Brewup.Infrastructure.ReadModel.Models;
 using Brewup.Modules.Stores.Abstracts;
-using Brewup.Modules.Stores.Shared.Dtos;
 using Brewup.Modules.Stores.Shared.ValueObjects;
 using Brewup.Shared.Concretes;
 using Microsoft.Extensions.Logging;
@@ -15,14 +14,11 @@ public sealed class BeerService : StoreBaseService, IBeerService
 	{
 	}
 
-	public async Task<string> CreateBeerAsync(BeerJson beerToCreate, CancellationToken cancellationToken)
+	public async Task<string> CreateBeerAsync(BeerId beerId, BeerName beerName, CancellationToken cancellationToken)
 	{
 		try
 		{
-			if (string.IsNullOrWhiteSpace(beerToCreate.BeerId))
-				beerToCreate.BeerId = Guid.NewGuid().ToString();
-
-			var beer = Beer.CreateBeer(new BeerId(new Guid(beerToCreate.BeerId)), new BeerName(beerToCreate.BeerName));
+			var beer = Beer.CreateBeer(beerId, beerName);
 			await Persister.InsertAsync(beer, cancellationToken);
 
 			return beer.Id;
