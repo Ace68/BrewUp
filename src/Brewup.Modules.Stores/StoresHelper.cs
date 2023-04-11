@@ -23,6 +23,7 @@ public static class StoresHelper
 
 		services.AddScoped<IDomainEventHandlerAsync<SparesAvailabilityCreated>, SparesAvailabilityCreatedEventHandler>();
 		services.AddScoped<IDomainEventHandlerAsync<BeerCreated>, BeerCreatedEventHandler>();
+		services.AddScoped<IDomainEventHandlerAsync<BeerDepositAdded>, BeerDepositAddedEventHandler>();
 
 		return services;
 	}

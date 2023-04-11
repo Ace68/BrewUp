@@ -25,5 +25,9 @@ public class StoresModule : IModule
 		mapGroup.MapPost("/availability", StoresEndpoints.HandleCreateAvailability)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("CreateAvailability");
+
+		mapGroup.MapPost("/beers/deposit", StoresEndpoints.HandleAddBeerDeposit)
+			.Produces(StatusCodes.Status400BadRequest)
+			.WithName("AddBeerDeposit");
 	}
 }
