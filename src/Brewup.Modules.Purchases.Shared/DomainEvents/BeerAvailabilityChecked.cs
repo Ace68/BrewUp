@@ -1,7 +1,7 @@
-﻿using Brewup.Modules.Stores.Shared.ValueObjects;
+﻿using Brewup.Modules.Purchases.Shared.ValueObjects;
 using Muflone.Messages.Events;
 
-namespace Brewup.Modules.Stores.Shared.DomainEvents;
+namespace Brewup.Modules.Purchases.Shared.DomainEvents;
 
 public sealed class BeerAvailabilityChecked : DomainEvent
 {

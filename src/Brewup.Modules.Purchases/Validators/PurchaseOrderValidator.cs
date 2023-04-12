@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Brewup.Modules.Purchases.Validators;
 
-public class PurchaseOrderValidator : AbstractValidator<PurchaseOrder>
+public class PurchaseOrderValidator : AbstractValidator<PurchaseOrderJson>
 {
 	public PurchaseOrderValidator()
 	{

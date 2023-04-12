@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Muflone" Version="6.1.1" />
+    <PackageReference Include="Muflone.Eventstore" Version="6.1.1" />
+    <PackageReference Include="Muflone.Transport.InMemory" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Consumers\Commands\" />
+    <Folder Include="Consumers\Events\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Brewup.Modules.Purchases.Shared\Brewup.Modules.Purchases.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

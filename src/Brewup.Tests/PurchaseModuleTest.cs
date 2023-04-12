@@ -23,7 +23,7 @@ public class PurchaseModuleTest
 	[Fact]
 	public async Task Cannot_Send_InvalidJson()
 	{
-		var body = new PurchaseOrder
+		var body = new PurchaseOrderJson
 		{
 			OrderId = string.Empty,
 			OrderNumber = string.Empty,
@@ -31,7 +31,7 @@ public class PurchaseModuleTest
 			CustomerId = string.Empty,
 			CustomerName = string.Empty,
 			TotalAmount = 0,
-			Rows = Enumerable.Empty<PurchaseOrderRow>()
+			Rows = Enumerable.Empty<PurchaseOrderRowJson>()
 		};
 
 		var stringJson = JsonSerializer.Serialize(body);

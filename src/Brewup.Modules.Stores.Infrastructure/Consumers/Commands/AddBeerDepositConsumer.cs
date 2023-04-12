@@ -5,7 +5,7 @@ using Muflone.Messages.Commands;
 using Muflone.Persistence;
 using Muflone.Transport.InMemory.Consumers;
 
-namespace Brewup.Infrastructure.Muflone.Consumers.Commands;
+namespace Brewup.Modules.Stores.Infrastructure.Consumers.Commands;
 
 public sealed class AddBeerDepositConsumer : CommandConsumerBase<AddBeerDeposit>
 {

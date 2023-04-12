@@ -4,5 +4,5 @@ namespace Brewup.Modules.Purchases.Abstracts;
 
 public interface IPurchaseService
 {
-	Task<string> AddOrderAsync(PurchaseOrder orderToAdd, CancellationToken cancellationToken);
+	Task<string> AddOrderAsync(PurchaseOrderJson orderToAdd, CancellationToken cancellationToken);
 }

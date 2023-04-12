@@ -1,5 +1,6 @@
-﻿using Brewup.Infrastructure.Muflone.Consumers.Commands;
-using Brewup.Infrastructure.Muflone.Consumers.Events;
+﻿using Brewup.Modules.Purchases.Infrastructure.Consumers.Events;
+using Brewup.Modules.Stores.Infrastructure.Consumers.Commands;
+using Brewup.Modules.Stores.Infrastructure.Consumers.Events;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
@@ -18,6 +19,7 @@ public static class MufloneHelper
 
 		var consumers = new List<IConsumer>
 		{
+			#region Stores
 			new CreateBeerConsumer(repository!, loggerFactory!),
 			new BeerCreatedConsumer(serviceProvider, loggerFactory!),
 
@@ -25,6 +27,11 @@ public static class MufloneHelper
 			new BeerDepositAddedConsumer(serviceProvider, loggerFactory!),
 
 			new AskForBeerAvailabilityConsumer(repository!, loggerFactory!),
+			#endregion
+
+			#region Purchases
+			new BeerAvailabilityCheckedConsumer(serviceProvider, loggerFactory!),
+			#endregion
 		};
 
 		services.AddMufloneTransportInMemory(consumers);

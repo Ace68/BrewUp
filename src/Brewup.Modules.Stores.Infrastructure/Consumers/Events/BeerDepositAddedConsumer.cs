@@ -5,7 +5,7 @@ using Muflone.Messages.Events;
 using Muflone.Persistence;
 using Muflone.Transport.InMemory.Consumers;
 
-namespace Brewup.Infrastructure.Muflone.Consumers.Events;
+namespace Brewup.Modules.Stores.Infrastructure.Consumers.Events;
 
 public sealed class BeerDepositAddedConsumer : DomainEventConsumerBase<BeerDepositAdded>
 {

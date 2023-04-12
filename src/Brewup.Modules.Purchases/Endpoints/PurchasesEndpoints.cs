@@ -10,9 +10,9 @@ public static class PurchasesEndpoints
 {
 	public static async Task<IResult> HandleAddOrder(
 		IPurchaseOrchestrator purchaseOrchestrator,
-		IValidator<PurchaseOrder> validator,
+		IValidator<PurchaseOrderJson> validator,
 		ValidationHandler validationHandler,
-		PurchaseOrder body,
+		PurchaseOrderJson body,
 		CancellationToken cancellationToken
 	)
 	{
