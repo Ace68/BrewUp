@@ -64,4 +64,17 @@ public class Beer : AggregateRoot
 		_availability = new Availability(_stock.Value - _salesCommitted.Value);
 	}
 	#endregion
+
+	#region Availability
+	internal void CheckAvailability()
+	{
+		RaiseEvent(new BeerAvailabilityChecked(_beerId, _stock, _availability, new ProductionCommitted(0),
+						_salesCommitted, new SupplierOrdered(0)));
+	}
+
+	private void Apply(BeerAvailabilityChecked @event)
+	{
+		// do nothing
+	}
+	#endregion
 }

@@ -22,7 +22,9 @@ public static class MufloneHelper
 			new BeerCreatedConsumer(serviceProvider, loggerFactory!),
 
 			new AddBeerDepositConsumer(repository!, loggerFactory!),
-			new BeerDepositAddedConsumer(serviceProvider, loggerFactory!)
+			new BeerDepositAddedConsumer(serviceProvider, loggerFactory!),
+
+			new AskForBeerAvailabilityConsumer(repository!, loggerFactory!),
 		};
 
 		services.AddMufloneTransportInMemory(consumers);
