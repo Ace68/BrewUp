@@ -13,19 +13,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "40 ReadModel", "40 ReadMode
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "50 Modules", "50 Modules", "{0282FE52-D0DB-4537-8FAA-1BC3A6A6FA3F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Purchases", "Purchases", "{A12CC977-85FA-43BC-A6F8-359960DEA9BD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sales", "Sales", "{A12CC977-85FA-43BC-A6F8-359960DEA9BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{AA3205D2-A26C-4A8E-9592-2610244A1FBF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stores", "Stores", "{E306E7C6-A66C-4010-9F09-E877BFBB7AC8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Warehouse", "Warehouse", "{E306E7C6-A66C-4010-9F09-E877BFBB7AC8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup", "BrewUp\Brewup.csproj", "{8D763CC0-9BEA-4A99-A0A6-7E3DB00E7CFA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Production", "Brewup.Modules.Production\Brewup.Modules.Production.csproj", "{ACEC4C81-01D4-42CE-B920-7FA70DCAF6F3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Purchases", "Brewup.Modules.Purchases\Brewup.Modules.Purchases.csproj", "{53992DDB-A3C1-4138-87C3-891DBA7E0F31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Sales", "Brewup.Modules.Sales\Brewup.Modules.Sales.csproj", "{53992DDB-A3C1-4138-87C3-891DBA7E0F31}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Stores", "Brewup.Modules.Stores\Brewup.Modules.Stores.csproj", "{641C2B20-5A69-4F41-AD12-B88163419DFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Warehouse", "Brewup.Modules.Warehouse\Brewup.Modules.Warehouse.csproj", "{641C2B20-5A69-4F41-AD12-B88163419DFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Shared", "Brewup.Shared\Brewup.Shared.csproj", "{0ED92D62-E7EA-4DE0-930E-4AFB65B0FC41}"
 EndProject
@@ -33,13 +33,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EE658B54
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Tests", "Brewup.Tests\Brewup.Tests.csproj", "{E352722A-73C7-4269-A349-8535ECB8E856}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Purchases.Core", "Brewup.Modules.Purchases.Core\Brewup.Modules.Purchases.Core.csproj", "{96AB4FF9-9FDE-4AFC-9818-F1B921758737}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Sales.Core", "Brewup.Modules.Sales.Core\Brewup.Modules.Sales.Core.csproj", "{96AB4FF9-9FDE-4AFC-9818-F1B921758737}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3BB89329-DDCD-4728-8408-4E1B229A9293}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DFDBB64F-C995-4212-84A6-BB2334B9489B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Stores.Shared", "Brewup.Modules.Stores.Shared\Brewup.Modules.Stores.Shared.csproj", "{C89E3A3E-0CC3-4BAF-915A-4DE00D27F893}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Warehouse.Shared", "Brewup.Modules.Warehouse.Shared\Brewup.Modules.Warehouse.Shared.csproj", "{C89E3A3E-0CC3-4BAF-915A-4DE00D27F893}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Muflone", "Muflone", "{65669FC4-6042-4322-A114-DAD5E21B01BF}"
 EndProject
@@ -51,17 +51,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MongoDb", "MongoDb", "{1446
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Infrastructure.ReadModel.MongoDb", "Brewup.Infrastructure.ReadModel.MongoDb\Brewup.Infrastructure.ReadModel.MongoDb.csproj", "{9960D256-BACE-4D6E-B515-327730A9E235}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Stores.Core", "Brewup.Modules.Stores.Core\Brewup.Modules.Stores.Core.csproj", "{FF3FD412-4872-44C4-9C2C-F3CF789C0257}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Warehouse.Core", "Brewup.Modules.Warehouse.Core\Brewup.Modules.Warehouse.Core.csproj", "{FF3FD412-4872-44C4-9C2C-F3CF789C0257}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Stores.Core.Tests", "Brewup.Modules.Stores.Core.Tests\Brewup.Modules.Stores.Core.Tests.csproj", "{09135529-05EE-4D9A-B472-B1C4C482071D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Warehouse.Core.Tests", "Brewup.Modules.Warehouse.Core.Tests\Brewup.Modules.Warehouse.Core.Tests.csproj", "{09135529-05EE-4D9A-B472-B1C4C482071D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Purchases.Shared", "Brewup.Modules.Purchases.Shared\Brewup.Modules.Purchases.Shared.csproj", "{8039B633-390E-4C46-8B82-A475C3989E52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Sales.Shared", "Brewup.Modules.Sales.Shared\Brewup.Modules.Sales.Shared.csproj", "{8039B633-390E-4C46-8B82-A475C3989E52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Stores.Infrastructure", "Brewup.Modules.Stores.Infrastructure\Brewup.Modules.Stores.Infrastructure.csproj", "{8E2D32F1-6C2F-4F82-AD45-6D0460ED0702}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Warehouse.Infrastructure", "Brewup.Modules.Warehouse.Infrastructure\Brewup.Modules.Warehouse.Infrastructure.csproj", "{8E2D32F1-6C2F-4F82-AD45-6D0460ED0702}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Purchases.Infrastructure", "Brewup.Modules.Purchases.Infrastructure\Brewup.Modules.Purchases.Infrastructure.csproj", "{8B2F9F86-AA29-4C63-B88D-FEFC3CA05CF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Sales.Infrastructure", "Brewup.Modules.Sales.Infrastructure\Brewup.Modules.Sales.Infrastructure.csproj", "{8B2F9F86-AA29-4C63-B88D-FEFC3CA05CF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Purchases.Core.Tests", "Brewup.Modules.Purchases.Core.Tests\Brewup.Modules.Purchases.Core.Tests.csproj", "{4CA4C18D-9C77-4108-BC03-0F68F06EF213}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Sales.Core.Tests", "Brewup.Modules.Sales.Core.Tests\Brewup.Modules.Sales.Core.Tests.csproj", "{4CA4C18D-9C77-4108-BC03-0F68F06EF213}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

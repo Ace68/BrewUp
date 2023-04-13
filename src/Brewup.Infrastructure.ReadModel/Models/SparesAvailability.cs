@@ -1,6 +1,6 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
-using Brewup.Modules.Stores.Shared.Dtos;
-using Brewup.Modules.Stores.Shared.ValueObjects;
+using Brewup.Modules.Warehouse.Shared.Dtos;
+using Brewup.Modules.Warehouse.Shared.ValueObjects;
 
 namespace Brewup.Infrastructure.ReadModel.Models;
 

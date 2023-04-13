@@ -1,7 +1,7 @@
-﻿using Brewup.Modules.Purchases.Infrastructure.Consumers.Commands;
-using Brewup.Modules.Purchases.Infrastructure.Consumers.Events;
-using Brewup.Modules.Stores.Infrastructure.Consumers.Commands;
-using Brewup.Modules.Stores.Infrastructure.Consumers.Events;
+﻿using Brewup.Modules.Sales.Infrastructure.Consumers.Commands;
+using Brewup.Modules.Sales.Infrastructure.Consumers.Events;
+using Brewup.Modules.Warehouse.Infrastructure.Consumers.Commands;
+using Brewup.Modules.Warehouse.Infrastructure.Consumers.Events;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
@@ -20,7 +20,7 @@ public static class MufloneHelper
 
 		var consumers = new List<IConsumer>
 		{
-			#region Stores
+			#region Warehouse
 			new CreateBeerConsumer(repository!, loggerFactory!),
 			new BeerCreatedConsumer(serviceProvider, loggerFactory!),
 
@@ -30,9 +30,9 @@ public static class MufloneHelper
 			new AskForBeerAvailabilityConsumer(repository!, loggerFactory!),
 			#endregion
 
-			#region Purchases
+			#region Sales
 			new BeerAvailabilityCheckedConsumer(serviceProvider, loggerFactory!),
-			new LaunchPurchaseOrderSagaConsumer(loggerFactory!),
+			new LaunchSalesOrderSagaConsumer(loggerFactory!),
 			#endregion
 		};
 

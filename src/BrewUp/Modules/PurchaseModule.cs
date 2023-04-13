@@ -1,5 +1,5 @@
-﻿using Brewup.Modules.Purchases;
-using Brewup.Modules.Purchases.Endpoints;
+﻿using Brewup.Modules.Sales;
+using Brewup.Modules.Sales.Endpoints;
 
 namespace Brewup.Modules;
 
@@ -10,15 +10,15 @@ public class PurchaseModule : IModule
 
 	public void RegisterModule(WebApplicationBuilder builder)
 	{
-		builder.Services.AddPurchaseModule();
+		builder.Services.AddSalesModule();
 	}
 
 	public void MapEndpoints(IEndpointRouteBuilder endpoints)
 	{
-		var mapGroup = endpoints.MapGroup("v1/purchases")
-			.WithTags("Purchases");
+		var mapGroup = endpoints.MapGroup("v1/sales")
+			.WithTags("Sales");
 
-		mapGroup.MapPost("", PurchasesEndpoints.HandleAddOrder)
+		mapGroup.MapPost("", SalesEndpoints.HandleAddOrder)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("AddOrder");
 	}
