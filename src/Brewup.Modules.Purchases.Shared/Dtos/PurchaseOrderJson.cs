@@ -1,4 +1,4 @@
-﻿namespace Brewup.Modules.Purchases.Dtos;
+﻿namespace Brewup.Modules.Purchases.Shared.Dtos;
 
 public class PurchaseOrderJson
 {

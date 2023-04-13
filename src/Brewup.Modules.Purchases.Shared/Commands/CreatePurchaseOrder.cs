@@ -5,10 +5,30 @@ namespace Brewup.Modules.Purchases.Shared.Commands;
 
 public sealed class CreatePurchaseOrder : Command
 {
-	public readonly BeerId BeerId;
+	public readonly OrderId OrderId;
+	public readonly OrderNumber OrderNumber;
+	public readonly OrderDate OrderDate;
 
-	public CreatePurchaseOrder(BeerId aggregateId, Guid commitId) : base(aggregateId, commitId)
+	public readonly CustomerId CustomerId;
+	public readonly CustomerName CustomerName;
+
+	public readonly TotalAmount TotalAmount;
+
+	public readonly IEnumerable<PurchaseOrderRow> Rows;
+
+	public CreatePurchaseOrder(OrderId aggregateId, Guid commitId, OrderNumber orderNumber, OrderDate orderDate,
+		CustomerId customerId, CustomerName customerName, TotalAmount totalAmount, IEnumerable<PurchaseOrderRow> rows) :
+		base(aggregateId, commitId)
 	{
-		BeerId = aggregateId;
+		OrderId = aggregateId;
+		OrderNumber = orderNumber;
+		OrderDate = orderDate;
+
+		CustomerId = customerId;
+		CustomerName = customerName;
+
+		TotalAmount = totalAmount;
+
+		Rows = rows;
 	}
 }

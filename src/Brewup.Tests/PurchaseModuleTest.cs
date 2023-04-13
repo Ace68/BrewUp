@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Purchases.Dtos;
+﻿using Brewup.Modules.Purchases.Shared.Dtos;
 using System;
 using System.Linq;
 using System.Net;

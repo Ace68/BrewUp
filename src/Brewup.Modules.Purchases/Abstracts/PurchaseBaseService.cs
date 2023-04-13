@@ -1,13 +1,17 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Brewup.Infrastructure.ReadModel.Abstracts;
+using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Purchases.Abstracts;
 
-public sealed class PurchaseBaseService
+public abstract class PurchaseBaseService
 {
-	public readonly ILogger Logger;
+	protected readonly IPersister Persister;
+	protected readonly ILogger Logger;
 
-	public PurchaseBaseService(ILoggerFactory loggerFactory)
+	protected PurchaseBaseService(IPersister persister,
+		ILoggerFactory loggerFactory)
 	{
+		Persister = persister ?? throw new ArgumentNullException(nameof(persister));
 		Logger = loggerFactory.CreateLogger(GetType());
 	}
 }

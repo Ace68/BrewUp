@@ -1,5 +1,5 @@
 ﻿using Brewup.Modules.Purchases.Abstracts;
-using Brewup.Modules.Purchases.Dtos;
+using Brewup.Modules.Purchases.Shared.Dtos;
 using Brewup.Shared.Concretes;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;

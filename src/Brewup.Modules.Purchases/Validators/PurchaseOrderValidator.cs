@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Purchases.Dtos;
+﻿using Brewup.Modules.Purchases.Shared.Dtos;
 using FluentValidation;
 
 namespace Brewup.Modules.Purchases.Validators;

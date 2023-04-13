@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="DomainEvents\" />
-    <Folder Include="Dtos\" />
   </ItemGroup>
 
 </Project>

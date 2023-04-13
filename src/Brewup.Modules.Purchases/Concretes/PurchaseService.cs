@@ -1,5 +1,5 @@
 ﻿using Brewup.Modules.Purchases.Abstracts;
-using Brewup.Modules.Purchases.Dtos;
+using Brewup.Modules.Purchases.Shared.Dtos;
 using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Purchases.Concretes;

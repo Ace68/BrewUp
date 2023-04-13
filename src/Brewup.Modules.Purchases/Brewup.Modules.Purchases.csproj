@@ -19,6 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Brewup.Infrastructure.ReadModel\Brewup.Infrastructure.ReadModel.csproj" />
       <ProjectReference Include="..\Brewup.Modules.Purchases.Shared\Brewup.Modules.Purchases.Shared.csproj" />
       <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
     </ItemGroup>
