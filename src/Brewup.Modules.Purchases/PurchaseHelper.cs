@@ -14,8 +14,8 @@ public static class PurchaseHelper
 		services.AddFluentValidationAutoValidation();
 		services.AddValidatorsFromAssemblyContaining<PurchaseOrderValidator>();
 
-		services.AddSingleton<IPurchaseService, PurchaseService>();
-		services.AddSingleton<IPurchaseOrchestrator, PurchaseOrchestrator>();
+		services.AddScoped<IPurchaseService, PurchaseService>();
+		services.AddScoped<IPurchaseOrchestrator, PurchaseOrchestrator>();
 
 		return services;
 	}

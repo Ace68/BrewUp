@@ -13,12 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Consumers\Commands\" />
     <Folder Include="Consumers\Events\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Brewup.Modules.Purchases.Shared\Brewup.Modules.Purchases.Shared.csproj" />
+    <ProjectReference Include="..\Brewup.Modules.Purchases\Brewup.Modules.Purchases.csproj" />
   </ItemGroup>
 
 </Project>

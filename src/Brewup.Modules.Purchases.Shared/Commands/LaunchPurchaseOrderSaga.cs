@@ -3,7 +3,7 @@ using Muflone.Messages.Commands;
 
 namespace Brewup.Modules.Purchases.Shared.Commands;
 
-public sealed class CreatePurchaseOrder : Command
+public sealed class LaunchPurchaseOrderSaga : Command
 {
 	public readonly OrderId OrderId;
 	public readonly OrderNumber OrderNumber;
@@ -16,7 +16,7 @@ public sealed class CreatePurchaseOrder : Command
 
 	public readonly IEnumerable<PurchaseOrderRow> Rows;
 
-	public CreatePurchaseOrder(OrderId aggregateId, Guid commitId, OrderNumber orderNumber, OrderDate orderDate,
+	public LaunchPurchaseOrderSaga(OrderId aggregateId, Guid commitId, OrderNumber orderNumber, OrderDate orderDate,
 		CustomerId customerId, CustomerName customerName, TotalAmount totalAmount, IEnumerable<PurchaseOrderRow> rows) :
 		base(aggregateId, commitId)
 	{

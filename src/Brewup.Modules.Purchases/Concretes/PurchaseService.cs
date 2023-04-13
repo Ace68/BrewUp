@@ -1,16 +1,16 @@
-﻿using Brewup.Modules.Purchases.Abstracts;
+﻿using Brewup.Infrastructure.ReadModel.Abstracts;
+using Brewup.Modules.Purchases.Abstracts;
 using Brewup.Modules.Purchases.Shared.Dtos;
 using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Purchases.Concretes;
 
-public sealed class PurchaseService : IPurchaseService
+public sealed class PurchaseService : PurchaseBaseService, IPurchaseService
 {
-	private PurchaseBaseService BaseService { get; }
-
-	public PurchaseService(ILoggerFactory loggerFactory)
+	public PurchaseService(IPersister persister,
+		ILoggerFactory loggerFactory) : base(persister, loggerFactory)
 	{
-		BaseService = new PurchaseBaseService(loggerFactory);
+
 	}
 
 	public Task<string> AddOrderAsync(PurchaseOrderJson orderToAdd, CancellationToken cancellationToken)

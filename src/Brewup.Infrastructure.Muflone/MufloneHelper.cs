@@ -1,4 +1,5 @@
-﻿using Brewup.Modules.Purchases.Infrastructure.Consumers.Events;
+﻿using Brewup.Modules.Purchases.Infrastructure.Consumers.Commands;
+using Brewup.Modules.Purchases.Infrastructure.Consumers.Events;
 using Brewup.Modules.Stores.Infrastructure.Consumers.Commands;
 using Brewup.Modules.Stores.Infrastructure.Consumers.Events;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +32,7 @@ public static class MufloneHelper
 
 			#region Purchases
 			new BeerAvailabilityCheckedConsumer(serviceProvider, loggerFactory!),
+			new LaunchPurchaseOrderSagaConsumer(loggerFactory!),
 			#endregion
 		};
 

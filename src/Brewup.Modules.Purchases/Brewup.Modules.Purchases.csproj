@@ -9,6 +9,7 @@
     <ItemGroup>
       <Folder Include="Endpoints" />
       <Folder Include="EventsHandler\" />
+      <Folder Include="Sagas\" />
     </ItemGroup>
 
     <ItemGroup>
@@ -16,6 +17,7 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
       <PackageReference Include="Muflone" Version="6.1.1" />
+      <PackageReference Include="Muflone.Saga" Version="6.1.0" />
     </ItemGroup>
 
     <ItemGroup>

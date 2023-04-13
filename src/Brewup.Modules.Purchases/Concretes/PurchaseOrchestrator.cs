@@ -27,7 +27,10 @@ public sealed class PurchaseOrchestrator : IPurchaseOrchestrator
 			if (string.IsNullOrEmpty(orderToAdd.OrderId))
 				orderToAdd.OrderId = Guid.NewGuid().ToString();
 
-			var createPurchaseOrder = new CreatePurchaseOrder(
+			// Verify that BeerId, CustomerId, etc. are valid
+
+			//Start Saga here!
+			var createPurchaseOrder = new LaunchPurchaseOrderSaga(
 								new OrderId(new Guid(orderToAdd.OrderId)),
 												Guid.NewGuid(),
 												new OrderNumber(orderToAdd.OrderNumber),
