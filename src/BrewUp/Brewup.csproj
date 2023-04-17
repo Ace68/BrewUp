@@ -26,6 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\..\CQRS-Muflone\Muflone.Saga.Persistence.MongoDb\src\Muflone.Saga.Persistence.MongoDb\Muflone.Saga.Persistence.MongoDb.csproj" />
 	  <ProjectReference Include="..\Brewup.Infrastructure.Muflone\Brewup.Infrastructure.Muflone.csproj" />
 	  <ProjectReference Include="..\Brewup.Infrastructure.ReadModel.MongoDb\Brewup.Infrastructure.ReadModel.MongoDb.csproj" />
 	  <ProjectReference Include="..\Brewup.Modules.Production\Brewup.Modules.Production.csproj" />

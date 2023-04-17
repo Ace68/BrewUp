@@ -1,0 +1,98 @@
+﻿using Brewup.Modules.Warehouse.Shared.DomainEvents;
+using Brewup.Modules.Warehouse.Shared.ValueObjects;
+using Muflone.Core;
+
+namespace Brewup.Modules.Warehouse.Core.Entities;
+
+public class Warehouse : AggregateRoot
+{
+	private WarehouseId _warehouseId;
+	private WarehouseName _warehouseName;
+
+	private IEnumerable<Beer> _beers;
+	private IEnumerable<WarehouseMovement> _movements;
+
+	protected Warehouse()
+	{ }
+
+	#region ctor
+	internal static Warehouse CreateWarehouse(WarehouseId warehouseId, WarehouseName warehouseName)
+	{
+		return new Warehouse(warehouseId, warehouseName);
+	}
+
+	private Warehouse(WarehouseId warehouseId, WarehouseName warehouseName)
+	{
+		RaiseEvent(new WarehouseCreated(warehouseId, warehouseName));
+	}
+
+	private void Apply(WarehouseCreated @event)
+	{
+		Id = @event.AggregateId;
+
+		_warehouseId = @event.WarehouseId;
+		_warehouseName = @event.WarehouseName;
+
+		_beers = Enumerable.Empty<Beer>();
+		_movements = Enumerable.Empty<WarehouseMovement>();
+	}
+	#endregion
+
+	#region AddBeerDeposit
+	internal void AddBeerDeposit(MovementId movementId, MovementDate movementDate, CausalId causalId,
+		CausalDescription causalDescription, IEnumerable<BeerDepositRow> rows)
+	{
+		var beersAvailability = new List<BeerAvailabilityUpdated>();
+		foreach (var row in rows)
+		{
+			var beer = _beers.FirstOrDefault(x => x.BeerId == row.BeerId);
+			var stock = new Stock(0);
+			var availability = new Availability(0);
+			var productionCommitted = new ProductionCommitted(0);
+			var salesCommitted = new SalesCommitted(0);
+			var supplierOrdered = new SupplierOrdered(0);
+			if (beer != null)
+			{
+				stock = new Stock(Value: beer.GetStock().Value + row.MovementQuantity.Value);
+				availability = new Availability(Value: stock.Value - beer.GetProductionCommitted().Value - beer.GetSalesCommitted().Value + beer.GetSupplierOrdered().Value);
+				productionCommitted = beer.GetProductionCommitted();
+				salesCommitted = beer.GetSalesCommitted();
+				supplierOrdered = beer.GetSupplierOrdered();
+			}
+
+			beersAvailability.Add(new BeerAvailabilityUpdated(row.BeerId,
+				row.BeerName,
+				row.MovementQuantity,
+				stock,
+				availability,
+				productionCommitted,
+				salesCommitted,
+				supplierOrdered));
+		}
+
+		RaiseEvent(new BeerDepositAdded(_warehouseId, movementId, movementDate, causalId, causalDescription, beersAvailability));
+	}
+
+	private void Apply(BeerDepositAdded @event)
+	{
+		_movements = _movements.Append(WarehouseMovement.CreateWarehouseMovement(_warehouseId,
+			@event.MovementId,
+			@event.MovementDate,
+			@event.CausalId,
+			@event.CausalDescription,
+			@event.Rows.Select(r => new BeerDepositRow(r.BeerId, r.BeerName, r.MovementQuantity))));
+
+		foreach (var row in @event.Rows)
+		{
+			var beer = _beers.FirstOrDefault(x => x.BeerId == row.BeerId);
+			if (beer == null)
+			{
+				_beers = _beers.Append(Beer.CreateBeer(row.BeerId, row.BeerName));
+				beer = _beers.FirstOrDefault(x => x.BeerId == row.BeerId);
+			}
+
+			beer.UpdateAvailabilities(row.Stock);
+		}
+	}
+	#endregion
+}

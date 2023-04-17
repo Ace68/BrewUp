@@ -5,8 +5,7 @@ namespace Brewup.Modules.Warehouse.Core.Entities;
 
 public class WarehouseMovement : Entity
 {
-	private BeerId _beerId;
-	private StoreId _storeId;
+	private WarehouseId _warehouseId;
 
 	private MovementId _movementId;
 	private MovementDate _movementDate;
@@ -14,30 +13,28 @@ public class WarehouseMovement : Entity
 	private CausalId _causalId;
 	private CausalDescription _causalDescription;
 
-	private MovementQuantity _movementQuantity;
+	private readonly IEnumerable<BeerDepositRow> _rows;
 
 	protected WarehouseMovement()
 	{ }
 
-	internal static WarehouseMovement CreateWarehouseMovement(BeerId beerId, StoreId storeId, MovementId movementId, MovementDate movementDate,
-		CausalId causalId, CausalDescription causalDescription, MovementQuantity movementQuantity)
+	internal static WarehouseMovement CreateWarehouseMovement(WarehouseId warehouseId, MovementId movementId, MovementDate movementDate,
+		CausalId causalId, CausalDescription causalDescription, IEnumerable<BeerDepositRow> rows)
 	{
 		return new WarehouseMovement(
-			beerId,
-			storeId,
+			warehouseId,
 			movementId,
 			movementDate,
 			causalId,
 			causalDescription,
-			movementQuantity
+			rows
 		);
 	}
 
-	private WarehouseMovement(BeerId beerId, StoreId storeId, MovementId movementId, MovementDate movementDate,
-		CausalId causalId, CausalDescription causalDescription, MovementQuantity movementQuantity)
+	private WarehouseMovement(WarehouseId warehouseId, MovementId movementId, MovementDate movementDate,
+		CausalId causalId, CausalDescription causalDescription, IEnumerable<BeerDepositRow> rows)
 	{
-		_beerId = beerId;
-		_storeId = storeId;
+		_warehouseId = warehouseId;
 
 		_movementId = movementId;
 		_movementDate = movementDate;
@@ -45,6 +42,6 @@ public class WarehouseMovement : Entity
 		_causalId = causalId;
 		_causalDescription = causalDescription;
 
-		_movementQuantity = movementQuantity;
+		_rows = rows;
 	}
 }

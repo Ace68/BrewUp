@@ -11,29 +11,39 @@ namespace Brewup.Modules.Warehouse.Core.Tests.Entities;
 
 public sealed class AddBeerDepositTest : CommandSpecification<AddBeerDeposit>
 {
-	private readonly BeerId _beerId = new(Guid.NewGuid());
-	private readonly BeerName _beerName = new("Muflone IPA");
+	private readonly WarehouseId _warehouseId = new(Guid.NewGuid());
+	private readonly WarehouseName _warehouseName = new("WarehouseName");
 
-	private readonly StoreId _storeId = new(Guid.NewGuid());
+	private readonly BeerId _beerId = new(Guid.NewGuid().ToString());
+	private readonly BeerName _beerName = new("Muflone IPA");
+	private readonly MovementQuantity _movementQuantity = new(10);
+
 	private readonly MovementId _movementId = new(Guid.NewGuid().ToString());
 	private readonly MovementDate _movementDate = new(DateTime.Now);
 	private readonly CausalId _causalId = new(Guid.NewGuid().ToString());
 	private readonly CausalDescription _causalDescription = new("Versamento");
-	private readonly MovementQuantity _movementQuantity = new(10);
 
-	private readonly Stock _stock = new(10);
-	private readonly Availability _availability = new(10);
-	private readonly ProductionCommitted _productionCommitted = new(0);
-	private readonly SalesCommitted _salesCommitted = new(0);
-	private readonly SupplierOrdered _supplierOrdered = new(0);
+	private readonly IEnumerable<BeerDepositRow> _rows = Enumerable.Empty<BeerDepositRow>();
+	private readonly IEnumerable<BeerAvailabilityUpdated> _availabilities = Enumerable.Empty<BeerAvailabilityUpdated>();
+
+	public AddBeerDepositTest()
+	{
+		_rows = _rows.Concat(new List<BeerDepositRow>
+		{
+			new(_beerId, _beerName, _movementQuantity)
+		});
+		_availabilities = _availabilities.Append(new BeerAvailabilityUpdated(_beerId, _beerName, _movementQuantity,
+			new Stock(10), new Availability(10), new ProductionCommitted(0), new SalesCommitted(0),
+			new SupplierOrdered(0)));
+	}
 
 	protected override IEnumerable<DomainEvent> Given()
 	{
-		yield return new BeerCreated(_beerId, _beerName);
+		yield return new WarehouseCreated(_warehouseId, _warehouseName);
 	}
 
-	protected override AddBeerDeposit When() => new(_beerId, _storeId, _movementId, _movementDate, _causalId,
-		_causalDescription, _movementQuantity);
+	protected override AddBeerDeposit When() => new(_warehouseId, _movementId, _movementDate, _causalId,
+		_causalDescription, _rows);
 
 	protected override ICommandHandlerAsync<AddBeerDeposit> OnHandler()
 	{
@@ -42,7 +52,7 @@ public sealed class AddBeerDepositTest : CommandSpecification<AddBeerDeposit>
 
 	protected override IEnumerable<DomainEvent> Expect()
 	{
-		yield return new BeerDepositAdded(_beerId, _storeId, _movementId, _movementDate, _movementQuantity, _causalId,
-			_causalDescription, _stock, _availability, _salesCommitted, _productionCommitted, _supplierOrdered);
+		yield return new BeerDepositAdded(_warehouseId, _movementId, _movementDate, _causalId, _causalDescription,
+			_availabilities);
 	}
 }

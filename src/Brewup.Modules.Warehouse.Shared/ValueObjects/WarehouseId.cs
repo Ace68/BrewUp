@@ -2,9 +2,9 @@
 
 namespace Brewup.Modules.Warehouse.Shared.ValueObjects;
 
-public sealed class StoreId : DomainId
+public sealed class WarehouseId : DomainId
 {
-	public StoreId(Guid value) : base(value)
+	public WarehouseId(Guid value) : base(value)
 	{
 	}
 }

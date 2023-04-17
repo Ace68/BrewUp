@@ -18,16 +18,18 @@ public class WarehouseModule : IModule
 		var mapGroup = endpoints.MapGroup("v1/warehouses")
 			.WithTags("Warehouses");
 
-		mapGroup.MapPost("/beers", WarehouseEndpoints.HandleCreateBeer)
+		mapGroup.MapPost("", WarehouseEndpoints.HandleCreateWarehouse)
 			.Produces(StatusCodes.Status400BadRequest)
-			.WithName("CreateBeer");
-
-		mapGroup.MapPost("/availability", WarehouseEndpoints.HandleCreateAvailability)
-			.Produces(StatusCodes.Status400BadRequest)
-			.WithName("CreateAvailability");
+			.WithName("CreateWarehouse");
 
 		mapGroup.MapPost("/beers/deposit", WarehouseEndpoints.HandleAddBeerDeposit)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("AddBeerDeposit");
+
+		//mapGroup.MapPost("/availability", WarehouseEndpoints.HandleCreateAvailability)
+		//	.Produces(StatusCodes.Status400BadRequest)
+		//	.WithName("CreateAvailability");
+
+
 	}
 }

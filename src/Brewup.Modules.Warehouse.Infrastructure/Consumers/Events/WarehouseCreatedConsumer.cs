@@ -7,13 +7,13 @@ using Muflone.Transport.InMemory.Consumers;
 
 namespace Brewup.Modules.Warehouse.Infrastructure.Consumers.Events;
 
-public sealed class SparesAvailabilityCreatedConsumer : DomainEventConsumerBase<SparesAvailabilityCreated>
+public sealed class WarehouseCreatedConsumer : DomainEventConsumerBase<WarehouseCreated>
 {
-	protected override IEnumerable<IDomainEventHandlerAsync<SparesAvailabilityCreated>> HandlersAsync { get; }
+	protected override IEnumerable<IDomainEventHandlerAsync<WarehouseCreated>> HandlersAsync { get; }
 
-	public SparesAvailabilityCreatedConsumer(IServiceProvider serviceProvider,
+	public WarehouseCreatedConsumer(IServiceProvider serviceProvider,
 		ILoggerFactory loggerFactory, ISerializer? messageSerializer = null) : base(loggerFactory, messageSerializer)
 	{
-		HandlersAsync = serviceProvider.GetServices<IDomainEventHandlerAsync<SparesAvailabilityCreated>>();
+		HandlersAsync = serviceProvider.GetServices<IDomainEventHandlerAsync<WarehouseCreated>>();
 	}
 }

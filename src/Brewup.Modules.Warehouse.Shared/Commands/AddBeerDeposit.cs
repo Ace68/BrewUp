@@ -1,12 +1,31 @@
 ﻿using Brewup.Modules.Warehouse.Shared.ValueObjects;
+using Muflone.Messages.Commands;
 
 namespace Brewup.Modules.Warehouse.Shared.Commands;
 
-public sealed class AddBeerDeposit : CreateWarehouseMovement
+public sealed class AddBeerDeposit : Command
 {
-	public AddBeerDeposit(BeerId aggregateId, StoreId storeId, MovementId movementId, MovementDate movementDate,
-		CausalId causalId, CausalDescription causalDescription, MovementQuantity movementQuantity) : base(aggregateId,
-		storeId, movementId, movementDate, causalId, causalDescription, movementQuantity)
+	public readonly WarehouseId WarehouseId;
+
+	public readonly MovementId MovementId;
+	public readonly MovementDate MovementDate;
+
+	public readonly CausalId CausalId;
+	public readonly CausalDescription CausalDescription;
+
+	public readonly IEnumerable<BeerDepositRow> Rows;
+
+	public AddBeerDeposit(WarehouseId aggregateId, MovementId movementId, MovementDate movementDate,
+		CausalId causalId, CausalDescription causalDescription, IEnumerable<BeerDepositRow> rows) : base(aggregateId)
 	{
+		WarehouseId = aggregateId;
+
+		MovementId = movementId;
+		MovementDate = movementDate;
+
+		CausalId = causalId;
+		CausalDescription = causalDescription;
+
+		Rows = rows;
 	}
 }

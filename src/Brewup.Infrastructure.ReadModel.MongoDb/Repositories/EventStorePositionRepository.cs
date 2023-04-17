@@ -1,7 +1,6 @@
 ﻿using Brewup.Infrastructure.ReadModel.Models;
 using Brewup.Shared.Configuration;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Muflone.Eventstore.Persistence;
 
@@ -15,7 +14,6 @@ public class EventStorePositionRepository : IEventStorePositionRepository
 	public EventStorePositionRepository(ILogger<EventStorePositionRepository> logger, MongoDbSettings mongoDbSettings)
 	{
 		_logger = logger;
-		BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
 		var client = new MongoClient(mongoDbSettings.ConnectionString);
 		_database = client.GetDatabase(mongoDbSettings.DatabaseName);
 	}

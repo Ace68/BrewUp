@@ -5,11 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Warehouse.EventsHandler;
 
-public sealed class BeerDepositAddedEventHandler : DomainEventHandlerAsync<BeerDepositAdded>
+public sealed class BeerDepositAddedForBeerCreatedEventHandler : DomainEventHandlerAsync<BeerDepositAdded>
 {
 	private readonly IBeerService _beerService;
 
-	public BeerDepositAddedEventHandler(ILoggerFactory loggerFactory,
+	public BeerDepositAddedForBeerCreatedEventHandler(ILoggerFactory loggerFactory,
 		IBeerService beerService) : base(loggerFactory)
 	{
 		_beerService = beerService;
@@ -19,8 +19,11 @@ public sealed class BeerDepositAddedEventHandler : DomainEventHandlerAsync<BeerD
 	{
 		try
 		{
-			await _beerService.UpdateStoreQuantityAsync(@event.BeerId, @event.Stock, @event.Availability,
-				cancellationToken);
+			foreach (var row in @event.Rows)
+			{
+				await _beerService.CreateBeerAsync(row.BeerId, row.BeerName, cancellationToken);
+				await _beerService.UpdateStoreQuantityAsync(row.BeerId, row.Stock, row.Availability, cancellationToken);
+			}
 		}
 		catch (Exception ex)
 		{

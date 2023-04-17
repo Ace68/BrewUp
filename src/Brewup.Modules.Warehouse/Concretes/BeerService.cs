@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Warehouse.Concretes;
 
-public sealed class BeerService : StoreBaseService, IBeerService
+public sealed class BeerService : WarehouseBaseService, IBeerService
 {
 	public BeerService(ILoggerFactory loggerFactory,
 		IPersister persister) : base(loggerFactory, persister)
@@ -19,7 +19,11 @@ public sealed class BeerService : StoreBaseService, IBeerService
 	{
 		try
 		{
-			var beer = Beer.CreateBeer(beerId, beerName);
+			var beer = await Persister.GetByIdAsync<Beer>(beerId.ToString(), cancellationToken);
+			if (beer != null)
+				return beer.Id;
+
+			beer = Beer.CreateBeer(beerId, beerName);
 			await Persister.InsertAsync(beer, cancellationToken);
 
 			return beer.Id;

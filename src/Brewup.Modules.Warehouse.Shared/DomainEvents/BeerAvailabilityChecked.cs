@@ -5,22 +5,14 @@ namespace Brewup.Modules.Warehouse.Shared.DomainEvents;
 
 public sealed class BeerAvailabilityChecked : DomainEvent
 {
-	public readonly BeerId BeerId;
-	public readonly Stock Stock;
-	public readonly Availability Availability;
-	public readonly ProductionCommitted ProductionCommitted;
-	public readonly SalesCommitted SalesCommitted;
-	public readonly SupplierOrdered SupplierOrdered;
+	public readonly WarehouseId WarehouseId;
 
-	public BeerAvailabilityChecked(BeerId aggregateId, Stock stock, Availability availability,
-		ProductionCommitted productionCommitted, SalesCommitted salesCommitted, SupplierOrdered supplierOrdered) :
+	public readonly IEnumerable<BeerAvailability> Availabilities;
+
+	public BeerAvailabilityChecked(WarehouseId aggregateId, IEnumerable<BeerAvailability> availabilities) :
 		base(aggregateId)
 	{
-		BeerId = aggregateId;
-		Stock = stock;
-		Availability = availability;
-		ProductionCommitted = productionCommitted;
-		SalesCommitted = salesCommitted;
-		SupplierOrdered = supplierOrdered;
+		WarehouseId = aggregateId;
+		Availabilities = availabilities;
 	}
 }

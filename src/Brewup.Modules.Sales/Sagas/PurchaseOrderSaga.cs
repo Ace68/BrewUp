@@ -7,19 +7,14 @@ using Muflone.Saga.Persistence;
 
 namespace Brewup.Modules.Sales.Sagas;
 
-public class PurchaseOrderSaga2 : Saga<SalesSagaState>
-{
-	public PurchaseOrderSaga2(IServiceBus serviceBus, ISagaRepository repository) : base(serviceBus, repository)
-	{
-	}
-}
-
-public class PurchaseOrderSaga : ISaga<SalesSagaState>,
+public class PurchaseOrderSaga : Saga<SalesSagaState>,
 	ICommandHandlerAsync<LaunchSalesOrderSaga>
 {
-	public SalesSagaState SagaState { get; set; } = new();
+	public PurchaseOrderSaga(IServiceBus serviceBus, ISagaRepository repository) : base(serviceBus, repository)
+	{
+	}
 
-	public Task HandleAsync(LaunchSalesOrderSaga command, CancellationToken cancellationToken = new())
+	public async Task HandleAsync(LaunchSalesOrderSaga command, CancellationToken cancellationToken = new())
 	{
 		SagaState = new SalesSagaState
 		{
@@ -43,11 +38,12 @@ public class PurchaseOrderSaga : ISaga<SalesSagaState>,
 			}
 		};
 
+		var correlationId = Guid.NewGuid();
+		await Repository.SaveAsync(correlationId, SagaState);
+
 		// I have to send the first command to start the saga
 
 		// Check Beer Availability
-
-		return Task.CompletedTask;
 	}
 
 	#region Dispose

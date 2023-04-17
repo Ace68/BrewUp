@@ -1,5 +1,4 @@
 ﻿using Brewup.Modules.Warehouse.Core.Abstracts;
-using Brewup.Modules.Warehouse.Core.Entities;
 using Brewup.Modules.Warehouse.Shared.Commands;
 using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
@@ -16,10 +15,10 @@ public sealed class AskForBeerAvailabilityCommandHandler : CommandHandlerAsync<A
 	{
 		try
 		{
-			var beer = await Repository.GetByIdAsync<Beer>(command.BeerId.Value);
-			beer.CheckAvailability();
+			var warehouse = await Repository.GetByIdAsync<Entities.Warehouse>(command.WarehouseId.Value);
 
-			await Repository.SaveAsync(beer, Guid.NewGuid());
+
+			await Repository.SaveAsync(warehouse, Guid.NewGuid());
 		}
 		catch (Exception ex)
 		{

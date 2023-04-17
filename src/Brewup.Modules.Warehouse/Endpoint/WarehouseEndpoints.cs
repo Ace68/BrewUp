@@ -8,11 +8,11 @@ namespace Brewup.Modules.Warehouse.Endpoint;
 
 public static class WarehouseEndpoints
 {
-	public static async Task<IResult> HandleCreateBeer(
-		IStoresOrchestrator storesOrchestrator,
-		IValidator<BeerJson> validator,
+	public static async Task<IResult> HandleCreateWarehouse(
+		IWarehouseOrchestrator storesOrchestrator,
+		IValidator<WarehouseJson> validator,
 		ValidationHandler validationHandler,
-		BeerJson body,
+		WarehouseJson body,
 		CancellationToken cancellationToken
 	)
 	{
@@ -22,43 +22,18 @@ public static class WarehouseEndpoints
 
 		try
 		{
-			var beerId = await storesOrchestrator.CreateBeerAsync(body, cancellationToken);
-			return Results.Created($"/api/v1/stores/beers/{beerId}", beerId);
+			var warehouseId = await storesOrchestrator.CreateWarehouse(body, cancellationToken);
+			return Results.Created($"/api/v1/warehouses/{warehouseId}", warehouseId);
 		}
 		catch (Exception ex)
 		{
 			return Results.BadRequest(ex.Message);
 			throw;
 		}
-	}
-
-	public static async Task<IResult> HandleCreateAvailability(
-		IStoresOrchestrator storesOrchestrator,
-		IValidator<SpareAvailabilityJson> validator,
-		ValidationHandler validationHandler,
-		SpareAvailabilityJson body,
-		CancellationToken cancellationToken
-	)
-	{
-		await validationHandler.ValidateAsync(validator, body);
-		if (!validationHandler.IsValid)
-			return Results.BadRequest(validationHandler.Errors);
-
-		try
-		{
-			await storesOrchestrator.CreateAvailabilityAsync(body, cancellationToken);
-		}
-		catch (Exception ex)
-		{
-			return Results.BadRequest(ex.Message);
-			throw;
-		}
-
-		return Results.Accepted();
 	}
 
 	public static async Task<IResult> HandleAddBeerDeposit(
-		IStoresOrchestrator storesOrchestrator,
+		IWarehouseOrchestrator storesOrchestrator,
 		IValidator<BeerDepositJson> validator,
 		ValidationHandler validationHandler,
 		BeerDepositJson body,

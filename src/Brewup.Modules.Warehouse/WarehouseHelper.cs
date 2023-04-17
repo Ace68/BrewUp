@@ -17,13 +17,13 @@ public static class WarehouseHelper
 		services.AddFluentValidationAutoValidation();
 		services.AddValidatorsFromAssemblyContaining<SpareAvailabilityValidator>();
 
+		services.AddScoped<IWarehouseService, WarehouseService>();
 		services.AddScoped<ISparesAvailabilityService, SparesAvailabilityService>();
 		services.AddScoped<IBeerService, BeerService>();
-		services.AddScoped<IStoresOrchestrator, StoresOrchestrator>();
+		services.AddScoped<IWarehouseOrchestrator, WarehouseOrchestrator>();
 
-		services.AddScoped<IDomainEventHandlerAsync<SparesAvailabilityCreated>, SparesAvailabilityCreatedEventHandler>();
-		services.AddScoped<IDomainEventHandlerAsync<BeerCreated>, BeerCreatedEventHandler>();
-		services.AddScoped<IDomainEventHandlerAsync<BeerDepositAdded>, BeerDepositAddedEventHandler>();
+		services.AddScoped<IDomainEventHandlerAsync<WarehouseCreated>, WarehouseCreatedEventHandler>();
+		services.AddScoped<IDomainEventHandlerAsync<BeerDepositAdded>, BeerDepositAddedForBeerCreatedEventHandler>();
 
 		return services;
 	}

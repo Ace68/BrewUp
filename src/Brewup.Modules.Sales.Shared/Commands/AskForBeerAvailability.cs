@@ -7,7 +7,7 @@ public sealed class AskForBeerAvailability : Command
 {
 	public readonly BeerId BeerId;
 
-	public AskForBeerAvailability(BeerId aggregateId) : base(aggregateId)
+	public AskForBeerAvailability(BeerId aggregateId, Guid commitId) : base(aggregateId, commitId)
 	{
 		BeerId = aggregateId;
 	}

@@ -1,21 +1,27 @@
-﻿using Brewup.Modules.Warehouse.Shared.DomainEvents;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
+﻿using Brewup.Modules.Warehouse.Shared.ValueObjects;
 using Muflone.Core;
 
 namespace Brewup.Modules.Warehouse.Core.Entities;
 
-public class Beer : AggregateRoot
+public class Beer : Entity
 {
-	private BeerId _beerId;
+	public BeerId BeerId;
 	private BeerName _beerName;
 
 	private Stock _stock;
 	private Availability _availability;
-	private SalesCommitted _salesCommitted;
 
-	private IEnumerable<WarehouseMovement> _movements;
+	private ProductionCommitted _productionCommitted;
+	private SalesCommitted _salesCommitted;
+	private SupplierOrdered _supplierOrdered;
 
 	protected Beer() { }
+
+	public Stock GetStock() => _stock;
+	public Availability GetAvailability() => _availability;
+	public ProductionCommitted GetProductionCommitted() => _productionCommitted;
+	public SalesCommitted GetSalesCommitted() => _salesCommitted;
+	public SupplierOrdered GetSupplierOrdered() => _supplierOrdered;
 
 	#region constructor
 	internal static Beer CreateBeer(BeerId beerId, BeerName beerName)
@@ -25,56 +31,22 @@ public class Beer : AggregateRoot
 
 	private Beer(BeerId beerId, BeerName beerName)
 	{
-		RaiseEvent(new BeerCreated(beerId, beerName));
-	}
-
-	private void Apply(BeerCreated @event)
-	{
-		Id = @event.AggregateId;
-
-		_beerId = @event.BeerId;
-		_beerName = @event.BeerName;
+		BeerId = beerId;
+		_beerName = beerName;
 
 		_stock = new Stock(0);
 		_availability = new Availability(0);
+
+		_productionCommitted = new ProductionCommitted(0);
 		_salesCommitted = new SalesCommitted(0);
-
-		_movements = Enumerable.Empty<WarehouseMovement>();
+		_supplierOrdered = new SupplierOrdered(0);
 	}
 	#endregion
 
-	#region warehouseDeposit
-	internal void AddWarehouseDeposit(StoreId storeId, MovementId movementId, MovementDate movementDate, CausalId causalId,
-		CausalDescription causalDescription, MovementQuantity movementQuantity)
+	internal void UpdateAvailabilities(Stock stock)
 	{
-		var stock = new Stock(_stock.Value + movementQuantity.Value);
-		var availability = new Availability(stock.Value - _salesCommitted.Value);
-		RaiseEvent(new BeerDepositAdded(_beerId, storeId, movementId, movementDate, movementQuantity, causalId,
-			causalDescription, stock, availability, _salesCommitted, new ProductionCommitted(0),
-			new SupplierOrdered(0)));
+		_stock = stock;
+		_availability = new Availability(_stock.Value - _productionCommitted.Value - _salesCommitted.Value +
+										 _supplierOrdered.Value);
 	}
-
-	private void Apply(BeerDepositAdded @event)
-	{
-		var warehouseMovement = WarehouseMovement.CreateWarehouseMovement(_beerId, @event.StoreId, @event.MovementId,
-			@event.MovementDate, @event.CausalId, @event.CausalDescription, @event.MovementQuantity);
-		_movements = _movements.Append(warehouseMovement);
-
-		_stock = new Stock(_stock.Value + @event.MovementQuantity.Value);
-		_availability = new Availability(_stock.Value - _salesCommitted.Value);
-	}
-	#endregion
-
-	#region Availability
-	internal void CheckAvailability()
-	{
-		RaiseEvent(new BeerAvailabilityChecked(_beerId, _stock, _availability, new ProductionCommitted(0),
-						_salesCommitted, new SupplierOrdered(0)));
-	}
-
-	private void Apply(BeerAvailabilityChecked @event)
-	{
-		// do nothing
-	}
-	#endregion
 }

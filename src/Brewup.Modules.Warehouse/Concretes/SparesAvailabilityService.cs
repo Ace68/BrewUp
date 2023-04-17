@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Warehouse.Concretes;
 
-public sealed class SparesAvailabilityService : StoreBaseService, ISparesAvailabilityService
+public sealed class SparesAvailabilityService : WarehouseBaseService, ISparesAvailabilityService
 {
 	public SparesAvailabilityService(ILoggerFactory loggerFactory,
 		IPersister persister) : base(loggerFactory, persister)

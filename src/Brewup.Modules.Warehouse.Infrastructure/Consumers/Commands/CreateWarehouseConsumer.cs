@@ -7,13 +7,13 @@ using Muflone.Transport.InMemory.Consumers;
 
 namespace Brewup.Modules.Warehouse.Infrastructure.Consumers.Commands;
 
-public class CreateBeerConsumer : CommandConsumerBase<CreateBeer>
+public sealed class CreateWarehouseConsumer : CommandConsumerBase<CreateWarehouse>
 {
-	protected override ICommandHandlerAsync<CreateBeer> HandlerAsync { get; }
+	protected override ICommandHandlerAsync<CreateWarehouse> HandlerAsync { get; }
 
-	public CreateBeerConsumer(IRepository repository,
+	public CreateWarehouseConsumer(IRepository repository,
 		ILoggerFactory loggerFactory) : base(loggerFactory)
 	{
-		HandlerAsync = new CreateBeerCommandHandler(repository, loggerFactory);
+		HandlerAsync = new CreateWarehouseCommandHandler(repository, loggerFactory);
 	}
 }

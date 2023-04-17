@@ -9,25 +9,28 @@ using Muflone.SpecificationTests;
 
 namespace Brewup.Modules.Warehouse.Core.Tests.Entities;
 
-public sealed class CreateBeerTest : CommandSpecification<CreateBeer>
+public sealed class CreateWarehouseTest : CommandSpecification<CreateWarehouse>
 {
-	private readonly BeerId _beerId = new(Guid.NewGuid());
-	private readonly BeerName _beerName = new("Muflone IPA");
+	private readonly WarehouseId _warehouseId = new(Guid.NewGuid());
+	private readonly WarehouseName _warehouseName = new("WarehouseName");
 
 	protected override IEnumerable<DomainEvent> Given()
 	{
 		yield break;
 	}
 
-	protected override CreateBeer When() => new(_beerId, _beerName);
-
-	protected override ICommandHandlerAsync<CreateBeer> OnHandler()
+	protected override CreateWarehouse When()
 	{
-		return new CreateBeerCommandHandler(Repository, new NullLoggerFactory());
+		return new CreateWarehouse(_warehouseId, _warehouseName);
+	}
+
+	protected override ICommandHandlerAsync<CreateWarehouse> OnHandler()
+	{
+		return new CreateWarehouseCommandHandler(Repository, new NullLoggerFactory());
 	}
 
 	protected override IEnumerable<DomainEvent> Expect()
 	{
-		yield return new BeerCreated(_beerId, _beerName);
+		yield return new WarehouseCreated(_warehouseId, _warehouseName);
 	}
 }

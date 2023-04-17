@@ -1,14 +1,31 @@
 ﻿using Brewup.Modules.Warehouse.Shared.ValueObjects;
+using Muflone.Messages.Events;
 
 namespace Brewup.Modules.Warehouse.Shared.DomainEvents;
 
-public sealed class BeerDepositAdded : StoreMovementCreated
+public sealed class BeerDepositAdded : DomainEvent
 {
-	public BeerDepositAdded(BeerId aggregateId, StoreId storeId, MovementId movementId, MovementDate movementDate,
-		MovementQuantity movementQuantity, CausalId causalId, CausalDescription causalDescription, Stock stock,
-		Availability availability, SalesCommitted salesCommitted, ProductionCommitted productionCommitted,
-		SupplierOrdered supplierOrdered) : base(aggregateId, storeId, movementId, movementDate, movementQuantity,
-		causalId, causalDescription, stock, availability, salesCommitted, productionCommitted, supplierOrdered)
+	public readonly WarehouseId WarehouseId;
+
+	public readonly MovementId MovementId;
+	public readonly MovementDate MovementDate;
+
+	public readonly CausalId CausalId;
+	public readonly CausalDescription CausalDescription;
+
+	public readonly IEnumerable<BeerAvailabilityUpdated> Rows;
+
+	public BeerDepositAdded(WarehouseId aggregateId, MovementId movementId, MovementDate movementDate,
+		CausalId causalId, CausalDescription causalDescription, IEnumerable<BeerAvailabilityUpdated> rows) : base(aggregateId)
 	{
+		WarehouseId = aggregateId;
+
+		MovementId = movementId;
+		MovementDate = movementDate;
+
+		CausalId = causalId;
+		CausalDescription = causalDescription;
+
+		Rows = rows;
 	}
 }
