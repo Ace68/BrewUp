@@ -13,11 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Brewup.Modules.Purchases.Infrastructure\Brewup.Modules.Purchases.Infrastructure.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Sales.Infrastructure\Brewup.Modules.Sales.Infrastructure.csproj" />
-    <ProjectReference Include="..\Brewup.Modules.Stores.Core\Brewup.Modules.Stores.Core.csproj" />
-    <ProjectReference Include="..\Brewup.Modules.Stores.Infrastructure\Brewup.Modules.Stores.Infrastructure.csproj" />
-    <ProjectReference Include="..\Brewup.Modules.Stores\Brewup.Modules.Stores.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Warehouse.Infrastructure\Brewup.Modules.Warehouse.Infrastructure.csproj" />
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
   </ItemGroup>
