@@ -1,5 +1,6 @@
 ﻿using Brewup.Modules.Warehouse.Shared.Dtos;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -20,18 +21,57 @@ public class WarehouseModuleTest
 	}
 
 	[Fact]
-	public async Task Cannot_Send_InvalidJson()
+	public async Task CreateWarehouse_Should_Throw_With_Invalid_Json()
 	{
-		var body = new SpareAvailabilityJson(string.Empty,
-			0,
-			0,
-			0,
-			0,
-			0);
+		var body = new WarehouseJson
+		{
+			WarehouseId = string.Empty,
+			WarehouseName = string.Empty
+		};
 
 		var stringJson = JsonSerializer.Serialize(body);
 		var httpContent = new StringContent(stringJson, Encoding.UTF8, "application/json");
-		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouse/availability", httpContent);
+		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouses", httpContent);
+
+		Assert.Equal(HttpStatusCode.BadRequest, postResult.StatusCode);
+	}
+
+	[Fact]
+	public async Task CreateWarehouse_Should_Not_Throw_With_Valid_Json()
+	{
+		var body = new WarehouseJson
+		{
+			WarehouseId = string.Empty,
+			WarehouseName = "Muflone Storage"
+		};
+
+		var stringJson = JsonSerializer.Serialize(body);
+		var httpContent = new StringContent(stringJson, Encoding.UTF8, "application/json");
+		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouses", httpContent);
+
+		Assert.Equal(HttpStatusCode.Created, postResult.StatusCode);
+	}
+
+	[Fact]
+	public async Task AddBeerDeposit_Should_Throw_With_Invalid_Json()
+	{
+		var body = new BeerDepositJson
+		{
+			WarehouseId = Guid.NewGuid().ToString(),
+			MovementDate = DateTime.UtcNow,
+
+			CausalId = string.Empty,
+			CausalDescription = "Versamento Prodotto Finito a Magazzino",
+
+			Rows = new List<BeerDepositRowJson>
+			{
+				new(Guid.NewGuid().ToString(), "Muflone IPA", 10)
+			}
+		};
+
+		var stringJson = JsonSerializer.Serialize(body);
+		var httpContent = new StringContent(stringJson, Encoding.UTF8, "application/json");
+		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouses/deposit", httpContent);
 
 		Assert.Equal(HttpStatusCode.BadRequest, postResult.StatusCode);
 	}
@@ -48,7 +88,7 @@ public class WarehouseModuleTest
 
 		var stringJson = JsonSerializer.Serialize(body);
 		var httpContent = new StringContent(stringJson, Encoding.UTF8, "application/json");
-		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouse/availability", httpContent);
+		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouses/availability", httpContent);
 
 		Assert.Equal(HttpStatusCode.Accepted, postResult.StatusCode);
 	}

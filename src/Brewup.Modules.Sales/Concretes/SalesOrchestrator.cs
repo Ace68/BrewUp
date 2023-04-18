@@ -42,7 +42,7 @@ public sealed class SalesOrchestrator : ISalesOrchestrator
 													new OrderId(new Guid(orderToAdd.OrderId)),
 													new RowId(Guid.NewGuid().ToString()),
 													new RowNumber(r.RowNumber),
-													new BeerId(new Guid(r.BeerId)),
+													new BeerId(r.BeerId),
 													new BeerName(r.BeerName),
 													new QuantityOrdered(r.QuantityOrdered),
 													new QuantityDelivered(r.QuantityDelivered),

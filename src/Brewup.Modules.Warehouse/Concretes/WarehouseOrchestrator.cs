@@ -40,6 +40,9 @@ public sealed class WarehouseOrchestrator : IWarehouseOrchestrator
 
 	public async Task AddBeerDepositAsync(BeerDepositJson beerDeposit, CancellationToken cancellationToken)
 	{
+		if (string.IsNullOrWhiteSpace(beerDeposit.MovementId))
+			beerDeposit.MovementId = Guid.NewGuid().ToString();
+
 		var addBeerDeposit = new AddBeerDeposit(new WarehouseId(new Guid(beerDeposit.WarehouseId)),
 									new MovementId(Guid.NewGuid().ToString()),
 									new MovementDate(beerDeposit.MovementDate),

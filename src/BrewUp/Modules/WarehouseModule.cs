@@ -22,7 +22,7 @@ public class WarehouseModule : IModule
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("CreateWarehouse");
 
-		mapGroup.MapPost("/beers/deposit", WarehouseEndpoints.HandleAddBeerDeposit)
+		mapGroup.MapPost("/deposit", WarehouseEndpoints.HandleAddBeerDeposit)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("AddBeerDeposit");
 

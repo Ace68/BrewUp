@@ -9,7 +9,7 @@ using Muflone.SpecificationTests;
 
 namespace Brewup.Modules.Warehouse.Core.Tests.Entities;
 
-public sealed class AskForBeerAvailabilityTest : CommandSpecification<AskForBeerAvailability>
+public sealed class AskForBeerAvailabilityTest : CommandSpecification<AskForBeersAvailability>
 {
 	private readonly WarehouseId _warehouseId = new(Guid.NewGuid());
 	private readonly WarehouseName _warehouseName = new("MufloneStorage");
@@ -34,6 +34,8 @@ public sealed class AskForBeerAvailabilityTest : CommandSpecification<AskForBeer
 	private readonly SalesCommitted _salesCommitted = new(0);
 	private readonly SupplierOrdered _supplierOrdered = new(0);
 
+	private readonly Guid _correlationId = Guid.NewGuid();
+
 	public AskForBeerAvailabilityTest()
 	{
 		_rows = _rows.Append(new BeerDepositRow(_beerId, _beerName, _movementQuantity));
@@ -50,15 +52,15 @@ public sealed class AskForBeerAvailabilityTest : CommandSpecification<AskForBeer
 			_causalDescription, _availabilitiesUpdated);
 	}
 
-	protected override AskForBeerAvailability When() => new(_warehouseId);
+	protected override AskForBeersAvailability When() => new(_warehouseId, _correlationId, new List<BeerId> { _beerId });
 
-	protected override ICommandHandlerAsync<AskForBeerAvailability> OnHandler()
+	protected override ICommandHandlerAsync<AskForBeersAvailability> OnHandler()
 	{
-		return new AskForBeerAvailabilityCommandHandler(Repository, new NullLoggerFactory());
+		return new AskForBeersAvailabilityCommandHandler(Repository, new NullLoggerFactory());
 	}
 
 	protected override IEnumerable<DomainEvent> Expect()
 	{
-		yield return new BeerAvailabilityChecked(_warehouseId, _beerAvailabilities);
+		yield return new BeersAvailabilityAsked(_warehouseId, _correlationId, _beerAvailabilities);
 	}
 }

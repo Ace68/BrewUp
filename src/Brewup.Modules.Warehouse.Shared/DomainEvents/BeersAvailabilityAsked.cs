@@ -3,14 +3,15 @@ using Muflone.Messages.Events;
 
 namespace Brewup.Modules.Warehouse.Shared.DomainEvents;
 
-public sealed class BeerAvailabilityChecked : DomainEvent
+public sealed class BeersAvailabilityAsked : DomainEvent
 {
 	public readonly WarehouseId WarehouseId;
 
 	public readonly IEnumerable<BeerAvailability> Availabilities;
 
-	public BeerAvailabilityChecked(WarehouseId aggregateId, IEnumerable<BeerAvailability> availabilities) :
-		base(aggregateId)
+
+	public BeersAvailabilityAsked(WarehouseId aggregateId, Guid correlationId,
+		IEnumerable<BeerAvailability> availabilities) : base(aggregateId, correlationId)
 	{
 		WarehouseId = aggregateId;
 		Availabilities = availabilities;

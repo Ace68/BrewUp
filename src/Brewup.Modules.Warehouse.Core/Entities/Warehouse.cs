@@ -95,4 +95,32 @@ public class Warehouse : AggregateRoot
 		}
 	}
 	#endregion
+
+	#region AskForBeerAvailability
+	internal void AskForBeersAvailability(IEnumerable<BeerId> beers, Guid correlationId)
+	{
+		var availabilities = Enumerable.Empty<BeerAvailability>();
+		foreach (var beerId in beers)
+		{
+			var beer = _beers.FirstOrDefault(x => x.BeerId == beerId);
+			if (beer != null)
+			{
+				availabilities = availabilities.Append(new BeerAvailability(beerId, beer.GetStock(), beer.GetAvailability(),
+					beer.GetProductionCommitted(), beer.GetSalesCommitted(), beer.GetSupplierOrdered()));
+			}
+			else
+			{
+				availabilities = availabilities.Append(new BeerAvailability(beerId, new Stock(0), new Availability(0),
+					new ProductionCommitted(0), new SalesCommitted(0), new SupplierOrdered(0)));
+			}
+		}
+
+		RaiseEvent(new BeersAvailabilityAsked(_warehouseId, correlationId, availabilities));
+	}
+
+	private void Apply(BeersAvailabilityAsked @event)
+	{
+		// do nothing
+	}
+	#endregion
 }

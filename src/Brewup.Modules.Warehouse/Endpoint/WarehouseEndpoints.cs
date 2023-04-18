@@ -28,7 +28,6 @@ public static class WarehouseEndpoints
 		catch (Exception ex)
 		{
 			return Results.BadRequest(ex.Message);
-			throw;
 		}
 	}
 

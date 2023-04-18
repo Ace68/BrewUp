@@ -1,10 +1,3 @@
-﻿using Muflone.Core;
+﻿namespace Brewup.Modules.Sales.Shared.ValueObjects;
 
-namespace Brewup.Modules.Sales.Shared.ValueObjects;
-
-public sealed class BeerId : DomainId
-{
-	public BeerId(Guid value) : base(value)
-	{
-	}
-}
+public record BeerId(string Value);
