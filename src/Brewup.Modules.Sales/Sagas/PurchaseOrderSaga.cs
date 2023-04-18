@@ -42,6 +42,10 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 		await Repository.SaveAsync(correlationId, SagaState);
 
 		// I have to send the first command to start the saga
+		var askForBeersAvailability = new AskForBeersAvailability(
+		{
+
+		};
 
 		// Check Beer Availability
 	}

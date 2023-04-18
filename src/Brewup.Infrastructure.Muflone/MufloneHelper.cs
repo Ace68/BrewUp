@@ -1,4 +1,5 @@
 ﻿using Brewup.Modules.Sales.Infrastructure.Consumers.Commands;
+using Brewup.Modules.Sales.Infrastructure.Consumers.Events;
 using Brewup.Modules.Warehouse.Infrastructure.Consumers.Commands;
 using Brewup.Modules.Warehouse.Infrastructure.Consumers.Events;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +35,10 @@ public static class MufloneHelper
 			#endregion
 
 			#region Sales
+			new BroadcastWarehouseCreatedConsumer(serviceProvider, loggerFactory!),
+
 			new LaunchSalesOrderSagaConsumer(serviceBus!, sagaRepository!, loggerFactory!),
+			
 			#endregion
 		};
 

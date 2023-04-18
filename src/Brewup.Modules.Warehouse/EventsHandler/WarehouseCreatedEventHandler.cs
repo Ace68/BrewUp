@@ -8,6 +8,7 @@ namespace Brewup.Modules.Warehouse.EventsHandler;
 public class WarehouseCreatedEventHandler : DomainEventHandlerAsync<WarehouseCreated>
 {
 	private readonly IWarehouseService _warehouseService;
+
 	public WarehouseCreatedEventHandler(ILoggerFactory loggerFactory,
 		IWarehouseService warehouseService) : base(loggerFactory)
 	{
