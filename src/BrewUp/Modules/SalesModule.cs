@@ -3,7 +3,7 @@ using Brewup.Modules.Sales.Endpoints;
 
 namespace Brewup.Modules;
 
-public class PurchaseModule : IModule
+public class SalesModule : IModule
 {
 	public bool IsEnabled => true;
 	public int Order => 0;

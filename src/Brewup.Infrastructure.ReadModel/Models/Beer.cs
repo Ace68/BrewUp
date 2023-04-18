@@ -15,7 +15,7 @@ public class Beer : ModelBase
 	protected Beer()
 	{ }
 
-	public static Beer CreateBeer(BeerId beerId, BeerName beerName) => new(beerId.ToString(), beerName.Value);
+	public static Beer CreateBeer(BeerId beerId, BeerName beerName) => new(beerId.Value, beerName.Value);
 
 	private Beer(string beerId, string beerName)
 	{

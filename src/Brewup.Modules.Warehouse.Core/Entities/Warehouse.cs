@@ -46,8 +46,8 @@ public class Warehouse : AggregateRoot
 		foreach (var row in rows)
 		{
 			var beer = _beers.FirstOrDefault(x => x.BeerId == row.BeerId);
-			var stock = new Stock(0);
-			var availability = new Availability(0);
+			var stock = new Stock(row.MovementQuantity.Value);
+			var availability = new Availability(row.MovementQuantity.Value);
 			var productionCommitted = new ProductionCommitted(0);
 			var salesCommitted = new SalesCommitted(0);
 			var supplierOrdered = new SupplierOrdered(0);

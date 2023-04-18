@@ -19,7 +19,7 @@ public sealed class BeerService : WarehouseBaseService, IBeerService
 	{
 		try
 		{
-			var beer = await Persister.GetByIdAsync<Beer>(beerId.ToString(), cancellationToken);
+			var beer = await Persister.GetByIdAsync<Beer>(beerId.Value, cancellationToken);
 			if (!string.IsNullOrWhiteSpace(beer.Id))
 				return beer.Id;
 

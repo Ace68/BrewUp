@@ -29,7 +29,7 @@ public sealed class SalesOrchestrator : ISalesOrchestrator
 
 			// Verify that BeerId, CustomerId, etc. are valid
 
-			//Start Saga here!
+			// Start Saga here!
 			var launchSalesOrder = new LaunchSalesOrderSaga(
 								new OrderId(new Guid(orderToAdd.OrderId)),
 												Guid.NewGuid(),
