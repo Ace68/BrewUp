@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Warehouse.Shared.ValueObjects;
+﻿using Brewup.Modules.Shared.CustomTypes;
 using Muflone.Messages.Commands;
 
 namespace Brewup.Modules.Warehouse.Shared.Commands;

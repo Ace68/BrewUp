@@ -1,5 +1,5 @@
-﻿using Brewup.Modules.Warehouse.Shared.Dtos;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
+﻿using Brewup.Modules.Shared.CustomTypes;
+using Brewup.Modules.Warehouse.Shared.Dtos;
 
 namespace Brewup.Modules.Warehouse.Shared.Helpers;
 

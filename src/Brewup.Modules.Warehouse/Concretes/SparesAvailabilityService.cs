@@ -1,14 +1,14 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
 using Brewup.Infrastructure.ReadModel.Models;
+using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Modules.Warehouse.Abstracts;
 using Brewup.Modules.Warehouse.Shared.Dtos;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
 using Brewup.Shared.Concretes;
 using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Warehouse.Concretes;
 
-public sealed class SparesAvailabilityService : WarehouseBaseService, ISparesAvailabilityService
+internal sealed class SparesAvailabilityService : WarehouseBaseService, ISparesAvailabilityService
 {
 	public SparesAvailabilityService(ILoggerFactory loggerFactory,
 		IPersister persister) : base(loggerFactory, persister)

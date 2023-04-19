@@ -1,12 +1,12 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
+using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Modules.Warehouse.Abstracts;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
 using Brewup.Shared.Concretes;
 using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Warehouse.Concretes;
 
-public sealed class WarehouseService : WarehouseBaseService, IWarehouseService
+internal sealed class WarehouseService : WarehouseBaseService, IWarehouseService
 {
 	public WarehouseService(ILoggerFactory loggerFactory,
 		IPersister persister) : base(loggerFactory, persister)
@@ -18,7 +18,7 @@ public sealed class WarehouseService : WarehouseBaseService, IWarehouseService
 	{
 		try
 		{
-			var warehouse = Infrastructure.ReadModel.Models.Warehouse.Create(warehouseId, warehouseName);
+			var warehouse = Infrastructure.ReadModel.Models.WarehouseWarehouse.Create(warehouseId, warehouseName);
 
 			await Persister.InsertAsync(warehouse, cancellationToken);
 		}

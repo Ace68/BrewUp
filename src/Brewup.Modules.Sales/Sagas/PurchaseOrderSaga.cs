@@ -1,6 +1,6 @@
 ﻿using Brewup.Modules.Sales.Shared.Commands;
 using Brewup.Modules.Sales.Shared.Dtos;
-using Muflone.Messages.Commands;
+using Brewup.Modules.Shared.Commands;
 using Muflone.Persistence;
 using Muflone.Saga;
 using Muflone.Saga.Persistence;
@@ -8,13 +8,14 @@ using Muflone.Saga.Persistence;
 namespace Brewup.Modules.Sales.Sagas;
 
 public class PurchaseOrderSaga : Saga<SalesSagaState>,
-	ICommandHandlerAsync<LaunchSalesOrderSaga>
+	ISagaStartedByAsync<LaunchSalesOrderSaga>
 {
-	public PurchaseOrderSaga(IServiceBus serviceBus, ISagaRepository repository) : base(serviceBus, repository)
+	public PurchaseOrderSaga(IServiceBus serviceBus, ISagaRepository repository)
+		: base(serviceBus, repository)
 	{
 	}
 
-	public async Task HandleAsync(LaunchSalesOrderSaga command, CancellationToken cancellationToken = new())
+	public async Task StartedByAsync(LaunchSalesOrderSaga command)
 	{
 		SagaState = new SalesSagaState
 		{
@@ -23,8 +24,12 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 				OrderId = command.OrderId.Value.ToString(),
 				OrderNumber = command.OrderNumber.Value,
 				OrderDate = command.OrderDate.Value,
+
+				WarehouseId = command.WarehouseId.Value.ToString(),
+
 				CustomerId = command.CustomerId.Value,
 				CustomerName = command.CustomerName.Value,
+
 				TotalAmount = command.TotalAmount.Value,
 				Rows = command.Rows.Select(r => new SalesOrderRowJson
 				{
@@ -42,31 +47,8 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 		await Repository.SaveAsync(correlationId, SagaState);
 
 		// I have to send the first command to start the saga
-		var askForBeersAvailability = new AskForBeersAvailability(
-		{
-
-		};
-
-		// Check Beer Availability
+		var askForBeersAvailability =
+			new AskForBeersAvailability(command.WarehouseId, correlationId, command.Rows.Select(r => r.BeerId));
+		await ServiceBus.SendAsync(askForBeersAvailability, CancellationToken.None);
 	}
-
-	#region Dispose
-	protected virtual void Dispose(bool disposing)
-	{
-		if (disposing)
-		{
-		}
-	}
-
-	public void Dispose()
-	{
-		Dispose(true);
-		GC.SuppressFinalize(this);
-	}
-
-	~PurchaseOrderSaga()
-	{
-		Dispose(false);
-	}
-	#endregion
 }

@@ -1,5 +1,6 @@
-﻿using Brewup.Modules.Warehouse.Shared.DomainEvents;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
+﻿using Brewup.Modules.Shared.CustomTypes;
+using Brewup.Modules.Shared.DomainEvents;
+using Brewup.Modules.Warehouse.Shared.DomainEvents;
 using Muflone.Core;
 
 namespace Brewup.Modules.Warehouse.Core.Entities;

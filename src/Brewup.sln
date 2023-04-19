@@ -65,6 +65,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Sales.Core.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muflone.Saga.Persistence.MongoDb", "..\..\..\CQRS-Muflone\Muflone.Saga.Persistence.MongoDb\src\Muflone.Saga.Persistence.MongoDb\Muflone.Saga.Persistence.MongoDb.csproj", "{686EBFBE-5B95-440E-B79B-025CBE26680B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{79246628-94F7-466E-AE92-F590A024EB1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Shared", "Brewup.Modules.Shared\Brewup.Modules.Shared.csproj", "{ABD3AB0A-BCFA-499A-8368-A7AB76791970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +147,10 @@ Global
 		{686EBFBE-5B95-440E-B79B-025CBE26680B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{686EBFBE-5B95-440E-B79B-025CBE26680B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{686EBFBE-5B95-440E-B79B-025CBE26680B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABD3AB0A-BCFA-499A-8368-A7AB76791970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABD3AB0A-BCFA-499A-8368-A7AB76791970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABD3AB0A-BCFA-499A-8368-A7AB76791970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABD3AB0A-BCFA-499A-8368-A7AB76791970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,6 +182,8 @@ Global
 		{8B2F9F86-AA29-4C63-B88D-FEFC3CA05CF5} = {A12CC977-85FA-43BC-A6F8-359960DEA9BD}
 		{4CA4C18D-9C77-4108-BC03-0F68F06EF213} = {3BB89329-DDCD-4728-8408-4E1B229A9293}
 		{686EBFBE-5B95-440E-B79B-025CBE26680B} = {65669FC4-6042-4322-A114-DAD5E21B01BF}
+		{79246628-94F7-466E-AE92-F590A024EB1F} = {0282FE52-D0DB-4537-8FAA-1BC3A6A6FA3F}
+		{ABD3AB0A-BCFA-499A-8368-A7AB76791970} = {79246628-94F7-466E-AE92-F590A024EB1F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F9BD165F-4738-42F5-AC24-8DAE7B17192D}

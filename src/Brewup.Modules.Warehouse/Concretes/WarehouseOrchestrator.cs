@@ -1,14 +1,15 @@
-﻿using Brewup.Modules.Warehouse.Abstracts;
+﻿using Brewup.Modules.Shared.CustomTypes;
+using Brewup.Modules.Warehouse.Abstracts;
 using Brewup.Modules.Warehouse.Shared.Commands;
 using Brewup.Modules.Warehouse.Shared.Dtos;
 using Brewup.Modules.Warehouse.Shared.Helpers;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
+
 using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
 
 namespace Brewup.Modules.Warehouse.Concretes;
 
-public sealed class WarehouseOrchestrator : IWarehouseOrchestrator
+internal sealed class WarehouseOrchestrator : IWarehouseOrchestrator
 {
 	private readonly IBeerService _beerService;
 	private readonly IServiceBus _serviceBus;

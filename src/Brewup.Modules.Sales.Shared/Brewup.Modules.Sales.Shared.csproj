@@ -10,4 +10,8 @@
     <PackageReference Include="Muflone" Version="6.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Brewup.Modules.Shared\Brewup.Modules.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

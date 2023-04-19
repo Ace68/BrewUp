@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Warehouse.Shared.DomainEvents;
+﻿using Brewup.Modules.Shared.DomainEvents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Muflone.Messages.Events;

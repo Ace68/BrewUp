@@ -5,12 +5,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Sales.Concretes;
 
-public sealed class SalesService : PurchaseBaseService, ISalesService
+internal sealed class SalesService : PurchaseBaseService, ISalesService
 {
 	public SalesService(IPersister persister,
 		ILoggerFactory loggerFactory) : base(persister, loggerFactory)
 	{
-
 	}
 
 	public Task<string> AddOrderAsync(SalesOrderJson orderToAdd, CancellationToken cancellationToken)

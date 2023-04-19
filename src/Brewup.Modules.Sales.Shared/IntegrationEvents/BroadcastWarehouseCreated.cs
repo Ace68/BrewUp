@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Sales.Shared.ValueObjects;
+﻿using Brewup.Modules.Shared.CustomTypes;
 using Muflone.Messages.Events;
 
 namespace Brewup.Modules.Sales.Shared.IntegrationEvents;

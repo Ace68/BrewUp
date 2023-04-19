@@ -1,7 +1,7 @@
-﻿using Brewup.Modules.Warehouse.Core.CommandHandlers;
+﻿using Brewup.Modules.Shared.CustomTypes;
+using Brewup.Modules.Warehouse.Core.CommandHandlers;
 using Brewup.Modules.Warehouse.Shared.Commands;
 using Brewup.Modules.Warehouse.Shared.DomainEvents;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
 using Microsoft.Extensions.Logging.Abstractions;
 using Muflone.Messages.Commands;
 using Muflone.Messages.Events;

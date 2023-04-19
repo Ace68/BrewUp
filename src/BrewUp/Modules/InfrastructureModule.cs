@@ -1,5 +1,6 @@
 ﻿using Brewup.Infrastructure.Muflone;
 using Brewup.Infrastructure.ReadModel.MongoDb;
+using Brewup.Modules.Sales.Sagas;
 using Brewup.Shared.Configuration;
 using Muflone.Eventstore;
 using Muflone.Saga.Persistence.MongoDb;
@@ -19,6 +20,8 @@ public class InfrastructureModule : IModule
 
 		builder.Services.AddMufloneEventStore(builder.Configuration["BrewUp:EventStoreSettings:ConnectionString"]!);
 		builder.Services.AddMuflone();
+
+		builder.Services.AddScoped<PurchaseOrderSaga>();
 	}
 
 	public void MapEndpoints(IEndpointRouteBuilder endpoints)

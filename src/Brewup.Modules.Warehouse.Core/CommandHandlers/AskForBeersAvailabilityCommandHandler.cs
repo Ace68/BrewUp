@@ -1,5 +1,5 @@
-﻿using Brewup.Modules.Warehouse.Core.Abstracts;
-using Brewup.Modules.Warehouse.Shared.Commands;
+﻿using Brewup.Modules.Shared.Commands;
+using Brewup.Modules.Warehouse.Core.Abstracts;
 using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
 

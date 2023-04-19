@@ -1,4 +1,4 @@
-﻿using Brewup.Modules.Warehouse.Shared.ValueObjects;
+﻿using Brewup.Modules.Shared.CustomTypes;
 
 namespace Brewup.Modules.Warehouse.Abstracts;
 

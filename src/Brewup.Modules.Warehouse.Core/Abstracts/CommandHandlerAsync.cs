@@ -6,7 +6,7 @@ namespace Brewup.Modules.Warehouse.Core.Abstracts;
 
 public abstract class CommandHandlerAsync<TCommand> : ICommandHandlerAsync<TCommand> where TCommand : class, ICommand
 {
-	protected IRepository Repository;
+	protected readonly IRepository Repository;
 	protected readonly ILogger Logger;
 
 	protected CommandHandlerAsync(IRepository repository,

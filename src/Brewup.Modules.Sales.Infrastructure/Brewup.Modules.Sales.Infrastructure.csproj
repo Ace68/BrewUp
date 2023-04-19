@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Brewup.Modules.Sales\Brewup.Modules.Sales.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Consumers\Commands\" />
+  </ItemGroup>
+
 </Project>

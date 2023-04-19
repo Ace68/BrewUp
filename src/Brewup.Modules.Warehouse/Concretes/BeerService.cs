@@ -1,14 +1,14 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
 using Brewup.Infrastructure.ReadModel.Models;
+using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Modules.Warehouse.Abstracts;
 using Brewup.Modules.Warehouse.Shared.Dtos;
-using Brewup.Modules.Warehouse.Shared.ValueObjects;
 using Brewup.Shared.Concretes;
 using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Warehouse.Concretes;
 
-public sealed class BeerService : WarehouseBaseService, IBeerService
+internal sealed class BeerService : WarehouseBaseService, IBeerService
 {
 	public BeerService(ILoggerFactory loggerFactory,
 		IPersister persister) : base(loggerFactory, persister)
@@ -19,11 +19,11 @@ public sealed class BeerService : WarehouseBaseService, IBeerService
 	{
 		try
 		{
-			var beer = await Persister.GetByIdAsync<Beer>(beerId.Value, cancellationToken);
+			var beer = await Persister.GetByIdAsync<WarehouseBeer>(beerId.Value, cancellationToken);
 			if (!string.IsNullOrWhiteSpace(beer.Id))
 				return beer.Id;
 
-			beer = Beer.CreateBeer(beerId, beerName);
+			beer = WarehouseBeer.CreateBeer(beerId, beerName);
 			await Persister.InsertAsync(beer, cancellationToken);
 
 			return beer.Id;
@@ -40,7 +40,7 @@ public sealed class BeerService : WarehouseBaseService, IBeerService
 	{
 		try
 		{
-			var beer = await Persister.GetByIdAsync<Beer>(beerId.ToString(), cancellationToken);
+			var beer = await Persister.GetByIdAsync<WarehouseBeer>(beerId.ToString(), cancellationToken);
 
 			beer.UpdateStoreQuantity(stock, availability);
 			var propertiesToUpdate = new Dictionary<string, object>
@@ -48,7 +48,7 @@ public sealed class BeerService : WarehouseBaseService, IBeerService
 				{ "Stock", beer.Stock },
 				{ "Availability", beer.Availability }
 			};
-			await Persister.UpdateOneAsync<Beer>(beer.Id, propertiesToUpdate, cancellationToken);
+			await Persister.UpdateOneAsync<WarehouseBeer>(beer.Id, propertiesToUpdate, cancellationToken);
 		}
 		catch (Exception ex)
 		{
@@ -61,7 +61,7 @@ public sealed class BeerService : WarehouseBaseService, IBeerService
 	{
 		try
 		{
-			var beer = await Persister.GetByIdAsync<Beer>(beerId.ToString(), cancellationToken);
+			var beer = await Persister.GetByIdAsync<WarehouseBeer>(beerId.ToString(), cancellationToken);
 			return beer.ToJson();
 		}
 		catch (Exception ex)
