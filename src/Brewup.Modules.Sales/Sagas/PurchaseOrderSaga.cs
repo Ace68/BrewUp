@@ -1,6 +1,8 @@
 ﻿using Brewup.Modules.Sales.Shared.Commands;
 using Brewup.Modules.Sales.Shared.Dtos;
 using Brewup.Modules.Shared.Commands;
+using Brewup.Modules.Shared.DomainEvents;
+using Muflone.Messages.Events;
 using Muflone.Persistence;
 using Muflone.Saga;
 using Muflone.Saga.Persistence;
@@ -8,7 +10,8 @@ using Muflone.Saga.Persistence;
 namespace Brewup.Modules.Sales.Sagas;
 
 public class PurchaseOrderSaga : Saga<SalesSagaState>,
-	ISagaStartedByAsync<LaunchSalesOrderSaga>
+	ISagaStartedByAsync<LaunchSalesOrderSaga>,
+	IDomainEventHandlerAsync<BeersAvailabilityAsked>
 {
 	public PurchaseOrderSaga(IServiceBus serviceBus, ISagaRepository repository)
 		: base(serviceBus, repository)
@@ -50,5 +53,13 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 		var askForBeersAvailability =
 			new AskForBeersAvailability(command.WarehouseId, correlationId, command.Rows.Select(r => r.BeerId));
 		await ServiceBus.SendAsync(askForBeersAvailability, CancellationToken.None);
+	}
+
+	public async Task HandleAsync(BeersAvailabilityAsked @event, CancellationToken cancellationToken = new())
+	{
+		var correlationId = new Guid(@event.UserProperties.FirstOrDefault(u => u.Key.Equals("CorrelationId")).Value.ToString());
+		var sagaState = await Repository.GetByIdAsync<SalesSagaState>(correlationId);
+
+
 	}
 }
