@@ -40,8 +40,13 @@ public sealed class AskForBeerAvailabilityTest : CommandSpecification<AskForBeer
 	public AskForBeerAvailabilityTest()
 	{
 		_rows = _rows.Append(new BeerDepositRow(_beerId, _beerName, _movementQuantity));
-		_beerAvailabilities = _beerAvailabilities.Append(new BeerAvailability(_beerId, _stock, _availability,
-						_productionCommitted, _salesCommitted, _supplierOrdered));
+
+		_beerAvailabilities = _beerAvailabilities.Concat(new List<BeerAvailability>
+		{
+			new (_beerId, _stock, _availability,
+				_productionCommitted, _salesCommitted, _supplierOrdered)
+		});
+
 		_availabilitiesUpdated = _availabilitiesUpdated.Append(new BeerAvailabilityUpdated(_beerId, _beerName,
 			_movementQuantity, _stock, _availability, _productionCommitted, _salesCommitted, _supplierOrdered));
 	}

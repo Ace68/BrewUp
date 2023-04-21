@@ -2,6 +2,7 @@
 using Brewup.Modules.Sales.Shared.Dtos;
 using Brewup.Modules.Shared.Commands;
 using Brewup.Modules.Shared.DomainEvents;
+using Microsoft.Extensions.Logging;
 using Muflone.Messages.Events;
 using Muflone.Persistence;
 using Muflone.Saga;
@@ -13,8 +14,9 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 	ISagaStartedByAsync<LaunchSalesOrderSaga>,
 	IDomainEventHandlerAsync<BeersAvailabilityAsked>
 {
-	public PurchaseOrderSaga(IServiceBus serviceBus, ISagaRepository repository)
-		: base(serviceBus, repository)
+	public PurchaseOrderSaga(IServiceBus serviceBus,
+		ISagaRepository repository,
+		ILoggerFactory loggerFactory) : base(serviceBus, repository, loggerFactory)
 	{
 	}
 

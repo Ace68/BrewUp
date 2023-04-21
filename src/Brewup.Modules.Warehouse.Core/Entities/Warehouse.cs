@@ -106,13 +106,19 @@ public class Warehouse : AggregateRoot
 			var beer = _beers.FirstOrDefault(x => x.BeerId == beerId);
 			if (beer != null)
 			{
-				availabilities = availabilities.Append(new BeerAvailability(beerId, beer.GetStock(), beer.GetAvailability(),
-					beer.GetProductionCommitted(), beer.GetSalesCommitted(), beer.GetSupplierOrdered()));
+				availabilities = availabilities.Concat(new List<BeerAvailability>
+				{
+					new (beerId, beer.GetStock(), beer.GetAvailability(),
+						beer.GetProductionCommitted(), beer.GetSalesCommitted(), beer.GetSupplierOrdered())
+				});
 			}
 			else
 			{
-				availabilities = availabilities.Append(new BeerAvailability(beerId, new Stock(0), new Availability(0),
-					new ProductionCommitted(0), new SalesCommitted(0), new SupplierOrdered(0)));
+				availabilities = availabilities.Concat(new List<BeerAvailability>
+				{
+					new (beerId, new Stock(0), new Availability(0),
+						new ProductionCommitted(0), new SalesCommitted(0), new SupplierOrdered(0))
+				});
 			}
 		}
 
@@ -122,6 +128,87 @@ public class Warehouse : AggregateRoot
 	private void Apply(BeersAvailabilityAsked @event)
 	{
 		// do nothing
+	}
+	#endregion
+
+	#region WithdrawnFromWarehouse
+	internal void WithdrawnFromWarehouse(IEnumerable<BeerToDrawn> beers, Guid commitId)
+	{
+		var beersDrawn = Enumerable.Empty<BeerToDrawn>();
+
+		foreach (var beerToDrawn in beers)
+		{
+			var beer = _beers.FirstOrDefault(x => x.BeerId == beerToDrawn.BeerId);
+
+			if (beer != null)
+			{
+				Stock stock;
+				Availability availability;
+				if (beer.GetAvailability().Value >= beerToDrawn.Quantity.Value)
+				{
+					stock = new Stock(beer.GetStock().Value - beerToDrawn.Quantity.Value);
+					availability = new Availability(stock.Value - beer.GetProductionCommitted().Value - beer.GetSalesCommitted().Value + beer.GetSupplierOrdered().Value);
+					beersDrawn = beersDrawn.Concat(new List<BeerToDrawn>
+					{
+						beerToDrawn with { Stock = stock, Availability = availability }
+					});
+				}
+
+				if (beer.GetAvailability().Value < beerToDrawn.Quantity.Value)
+				{
+					stock = new Stock(beer.GetStock().Value - beer.GetAvailability().Value);
+					availability = new Availability(stock.Value - beer.GetProductionCommitted().Value - beer.GetSalesCommitted().Value + beer.GetSupplierOrdered().Value);
+					beersDrawn = beersDrawn.Concat(new List<BeerToDrawn>
+					{
+						beerToDrawn with
+						{
+							Quantity = new Quantity(beerToDrawn.Quantity.Value - beer.GetAvailability().Value),
+							Stock = stock,
+							Availability = availability
+						}
+					});
+				}
+
+				if (beer.GetAvailability().Value == 0)
+				{
+					stock = beer.GetStock();
+					availability = beer.GetAvailability();
+					beersDrawn = beersDrawn.Concat(new List<BeerToDrawn>
+					{
+						beerToDrawn with
+						{
+							Quantity = new Quantity(0),
+							Stock = stock,
+							Availability = availability
+						}
+					});
+				}
+			}
+			else
+			{
+				beersDrawn = beersDrawn.Concat(new List<BeerToDrawn>
+				{
+					beerToDrawn with
+					{
+						Quantity = new Quantity(0),
+						Stock = new Stock(0),
+						Availability = new Availability(0)
+					}
+				});
+			}
+
+			RaiseEvent(new BeerWithdrawn(_warehouseId, commitId, beersDrawn));
+		}
+	}
+
+	private void Apply(BeerWithdrawn @event)
+	{
+		foreach (var beerToDrawn in @event.Beers)
+		{
+			var beer = _beers.FirstOrDefault(x => x.BeerId == beerToDrawn.BeerId);
+
+			beer?.UpdateAvailabilities(beerToDrawn.Stock);
+		}
 	}
 	#endregion
 }
