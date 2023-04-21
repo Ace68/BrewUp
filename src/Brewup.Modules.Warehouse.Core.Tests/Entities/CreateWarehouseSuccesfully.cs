@@ -9,7 +9,7 @@ using Muflone.SpecificationTests;
 
 namespace Brewup.Modules.Warehouse.Core.Tests.Entities;
 
-public sealed class CreateWarehouseTest : CommandSpecification<CreateWarehouse>
+public sealed class CreateWarehouseSuccesfully : CommandSpecification<CreateWarehouse>
 {
 	private readonly WarehouseId _warehouseId = new(Guid.NewGuid());
 	private readonly WarehouseName _warehouseName = new("WarehouseName");

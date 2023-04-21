@@ -9,10 +9,10 @@
   <ItemGroup>
     <PackageReference Include="Muflone" Version="6.2.0" />
     <PackageReference Include="Muflone.Eventstore" Version="6.1.1" />
-    <PackageReference Include="Muflone.Transport.InMemory" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\CQRS-Muflone\Muflone.Transport.InMemory\src\Muflone.Transport.InMemory\Muflone.Transport.InMemory.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Sales.Shared\Brewup.Modules.Sales.Shared.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Sales\Brewup.Modules.Sales.csproj" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Brewup.Modules.Warehouse.Infrastructure.Consumers.Commands;
+﻿using Brewup.Modules.Sales.Infrastructure.Consumers.Events;
+using Brewup.Modules.Warehouse.Infrastructure.Consumers.Commands;
 using Brewup.Modules.Warehouse.Infrastructure.Consumers.Events;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -30,14 +31,17 @@ public static class MufloneHelper
 			new BeerDepositAddedConsumer(serviceProvider, loggerFactory!),
 
 			new AskForBeersAvailabilityConsumer(repository!, loggerFactory!),
+
+			new WithdrawalFromWarehouseConsumer(repository!, loggerFactory!),
 			#endregion
 
 			#region Sales
 			//new BroadcastWarehouseCreatedConsumer(serviceProvider, loggerFactory!),
 			new BeersAvailabilityAskedConsumer(serviceProvider, loggerFactory!),
-
-	#endregion
-};
+			new BroadcastBeerWithdrawnConsumer(serviceProvider, loggerFactory!),
+			new BeerWithdrawnConsumer(serviceProvider, loggerFactory!),
+			#endregion
+		};
 
 		services.AddMufloneTransportInMemory(consumers);
 

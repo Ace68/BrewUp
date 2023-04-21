@@ -3,6 +3,7 @@ using Brewup.Modules.Sales.Concretes;
 using Brewup.Modules.Sales.Sagas;
 using Brewup.Modules.Sales.Validators;
 using Brewup.Modules.Shared.DomainEvents;
+using Brewup.Modules.Shared.IntegrationEvents;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,7 @@ public static class SalesHelper
 		services.AddScoped<ISalesOrchestrator, SalesOrchestrator>();
 
 		services.AddScoped<IDomainEventHandlerAsync<BeersAvailabilityAsked>, PurchaseOrderSaga>();
+		services.AddScoped<IIntegrationEventHandlerAsync<BroadcastBeerWithdrawn>, PurchaseOrderSaga>();
 
 		return services;
 	}

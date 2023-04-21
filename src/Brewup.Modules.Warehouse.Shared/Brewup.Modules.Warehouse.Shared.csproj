@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Muflone" Version="6.2.0" />
-    <PackageReference Include="Muflone.Transport.InMemory" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>

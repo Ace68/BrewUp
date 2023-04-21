@@ -1,7 +1,7 @@
 ﻿using Brewup.Modules.Shared.CustomTypes;
 using Muflone.Messages.Events;
 
-namespace Brewup.Modules.Shared.DomainEvents;
+namespace Brewup.Modules.Warehouse.Shared.DomainEvents;
 
 public sealed class BeerWithdrawn : DomainEvent
 {

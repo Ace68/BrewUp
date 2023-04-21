@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Brewup.Modules.Shared\Brewup.Modules.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CustomTypes\" />
+    <Folder Include="DomainEvents\" />
+  </ItemGroup>
+
 </Project>

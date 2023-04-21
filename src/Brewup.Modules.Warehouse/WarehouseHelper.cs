@@ -1,4 +1,5 @@
-﻿using Brewup.Modules.Warehouse.Abstracts;
+﻿using Brewup.Modules.Shared.DomainEvents;
+using Brewup.Modules.Warehouse.Abstracts;
 using Brewup.Modules.Warehouse.Concretes;
 using Brewup.Modules.Warehouse.EventsHandler;
 using Brewup.Modules.Warehouse.Shared.DomainEvents;
@@ -24,6 +25,7 @@ public static class WarehouseHelper
 
 		services.AddScoped<IDomainEventHandlerAsync<WarehouseCreated>, WarehouseCreatedEventHandler>();
 		services.AddScoped<IDomainEventHandlerAsync<BeerDepositAdded>, BeerDepositAddedForBeerCreatedEventHandler>();
+		services.AddScoped<IDomainEventHandlerAsync<BeerWithdrawn>, BeerWithdrawnEventHandler>();
 
 		return services;
 	}

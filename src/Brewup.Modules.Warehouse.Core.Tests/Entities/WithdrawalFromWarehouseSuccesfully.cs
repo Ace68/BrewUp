@@ -10,7 +10,7 @@ using Muflone.SpecificationTests;
 
 namespace Brewup.Modules.Warehouse.Core.Tests.Entities;
 
-public class WithdrawalFromWarehouseTest : CommandSpecification<WithdrawalFromWarehouse>
+public class WithdrawalFromWarehouseSuccesfully : CommandSpecification<WithdrawalFromWarehouse>
 {
 	private readonly WarehouseId _warehouseId = new(Guid.NewGuid());
 	private readonly WarehouseName _warehouseName = new("WarehouseName");
@@ -32,7 +32,7 @@ public class WithdrawalFromWarehouseTest : CommandSpecification<WithdrawalFromWa
 
 	private readonly Guid _commitId = Guid.NewGuid();
 
-	public WithdrawalFromWarehouseTest()
+	public WithdrawalFromWarehouseSuccesfully()
 	{
 		_rows = _rows.Concat(new List<BeerDepositRow>
 		{
@@ -64,7 +64,7 @@ public class WithdrawalFromWarehouseTest : CommandSpecification<WithdrawalFromWa
 
 	protected override ICommandHandlerAsync<WithdrawalFromWarehouse> OnHandler()
 	{
-		return new WithdrawanFromStockCommandHandler(Repository, new NullLoggerFactory());
+		return new WithdrawalFromWarehouseCommandHandler(Repository, new NullLoggerFactory());
 	}
 
 	protected override IEnumerable<DomainEvent> Expect()

@@ -1,7 +1,11 @@
 ﻿using Brewup.Modules.Sales.Shared.Commands;
+using Brewup.Modules.Sales.Shared.DomainEvents;
 using Brewup.Modules.Sales.Shared.Dtos;
+using Brewup.Modules.Sales.Shared.Helpers;
 using Brewup.Modules.Shared.Commands;
+using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Modules.Shared.DomainEvents;
+using Brewup.Modules.Shared.IntegrationEvents;
 using Microsoft.Extensions.Logging;
 using Muflone.Messages.Events;
 using Muflone.Persistence;
@@ -12,7 +16,9 @@ namespace Brewup.Modules.Sales.Sagas;
 
 public class PurchaseOrderSaga : Saga<SalesSagaState>,
 	ISagaStartedByAsync<LaunchSalesOrderSaga>,
-	IDomainEventHandlerAsync<BeersAvailabilityAsked>
+	IDomainEventHandlerAsync<BeersAvailabilityAsked>,
+	IIntegrationEventHandlerAsync<BroadcastBeerWithdrawn>,
+	IDomainEventHandlerAsync<SalesOrderCreated>
 {
 	public PurchaseOrderSaga(IServiceBus serviceBus,
 		ISagaRepository repository,
@@ -48,10 +54,11 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 			}
 		};
 
+		// Save SagaState
 		var correlationId = Guid.NewGuid();
 		await Repository.SaveAsync(correlationId, SagaState);
 
-		// I have to send the first command to start the saga
+		// I have to send the first command of the saga
 		var askForBeersAvailability =
 			new AskForBeersAvailability(command.WarehouseId, correlationId, command.Rows.Select(r => r.BeerId));
 		await ServiceBus.SendAsync(askForBeersAvailability, CancellationToken.None);
@@ -59,9 +66,43 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 
 	public async Task HandleAsync(BeersAvailabilityAsked @event, CancellationToken cancellationToken = new())
 	{
-		var correlationId = new Guid(@event.UserProperties.FirstOrDefault(u => u.Key.Equals("CorrelationId")).Value.ToString());
+		var correlationId = new Guid(@event.UserProperties.FirstOrDefault(u => u.Key.Equals("CorrelationId")).Value.ToString()!);
 		var sagaState = await Repository.GetByIdAsync<SalesSagaState>(correlationId);
 
+		if (sagaState is null)
+			return;
 
+		var withdrawalFromWarehouse = new WithdrawalFromWarehouse(@event.WarehouseId, correlationId,
+			sagaState.Order.Rows.Select(r => r.ToBeerToDrawn()));
+
+		await ServiceBus.SendAsync(withdrawalFromWarehouse);
 	}
+
+	public async Task HandleAsync(BroadcastBeerWithdrawn @event, CancellationToken cancellationToken = new())
+	{
+		var correlationId = new Guid(@event.UserProperties.FirstOrDefault(u => u.Key.Equals("CorrelationId")).Value.ToString()!);
+		var sagaState = await Repository.GetByIdAsync<SalesSagaState>(correlationId);
+
+		if (sagaState is null)
+			return;
+
+		var createSalesOrder = new CreateSalesOrder(
+			new OrderId(new Guid(sagaState.Order.OrderId)),
+			correlationId,
+			new OrderNumber(sagaState.Order.OrderNumber),
+			new OrderDate(sagaState.Order.OrderDate),
+			new CustomerId(sagaState.Order.CustomerId),
+			new CustomerName(sagaState.Order.CustomerName),
+			new TotalAmount(sagaState.Order.TotalAmount),
+			sagaState.Order.Rows.Select(r => r.ToSalesOrderRow()));
+
+		await ServiceBus.SendAsync(createSalesOrder, cancellationToken);
+	}
+
+	public Task HandleAsync(SalesOrderCreated @event, CancellationToken cancellationToken = new())
+	{
+		return Task.CompletedTask;
+	}
+
+
 }

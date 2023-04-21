@@ -5,9 +5,10 @@ using Muflone.Persistence;
 
 namespace Brewup.Modules.Warehouse.Core.CommandHandlers;
 
-public sealed class WithdrawanFromStockCommandHandler : CommandHandlerAsync<WithdrawalFromWarehouse>
+public sealed class WithdrawalFromWarehouseCommandHandler : CommandHandlerAsync<WithdrawalFromWarehouse>
 {
-	public WithdrawanFromStockCommandHandler(IRepository repository, ILoggerFactory loggerFactory) : base(repository, loggerFactory)
+	public WithdrawalFromWarehouseCommandHandler(IRepository repository,
+		ILoggerFactory loggerFactory) : base(repository, loggerFactory)
 	{
 	}
 
