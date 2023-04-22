@@ -1,4 +1,5 @@
 ﻿using Brewup.Modules.Sales.Core.Abstracts;
+using Brewup.Modules.Sales.Core.Entities;
 using Brewup.Modules.Sales.Shared.Commands;
 using Microsoft.Extensions.Logging;
 using Muflone.Persistence;
@@ -11,11 +12,13 @@ public class CreateSalesOrderCommandHandler : CommandHandlerAsync<CreateSalesOrd
 	{
 	}
 
-	public override Task HandleAsync(CreateSalesOrder command, CancellationToken cancellationToken = new())
+	public override async Task HandleAsync(CreateSalesOrder command, CancellationToken cancellationToken = new())
 	{
 		try
 		{
-
+			var aggregate = SalesOrder.CreateSalesOrder(command.OrderId, command.OrderNumber, command.OrderDate,
+				command.CustomerId, command.CustomerName, command.TotalAmount, command.Rows, command.MessageId);
+			await Repository.SaveAsync(aggregate, Guid.NewGuid());
 		}
 		catch (Exception ex)
 		{

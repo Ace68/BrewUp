@@ -103,6 +103,4 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 	{
 		return Task.CompletedTask;
 	}
-
-
 }

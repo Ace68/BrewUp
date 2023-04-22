@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="CommandHandlers\" />
     <Folder Include="Entities\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>

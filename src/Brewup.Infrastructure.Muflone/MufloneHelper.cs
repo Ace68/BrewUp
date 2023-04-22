@@ -43,6 +43,7 @@ public static class MufloneHelper
 			new BeerWithdrawnConsumer(serviceProvider, loggerFactory!),
 
 			new CreateSalesOrderConsumer(repository!, loggerFactory!),
+			new SalesOrderCreatedConsumer(serviceProvider, loggerFactory!),
 			#endregion
 		};
 

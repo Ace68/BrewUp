@@ -1,6 +1,7 @@
 ﻿using Brewup.Modules.Sales.Abstracts;
 using Brewup.Modules.Sales.Concretes;
 using Brewup.Modules.Sales.Sagas;
+using Brewup.Modules.Sales.Shared.DomainEvents;
 using Brewup.Modules.Sales.Validators;
 using Brewup.Modules.Shared.DomainEvents;
 using Brewup.Modules.Shared.IntegrationEvents;
@@ -23,6 +24,7 @@ public static class SalesHelper
 
 		services.AddScoped<IDomainEventHandlerAsync<BeersAvailabilityAsked>, PurchaseOrderSaga>();
 		services.AddScoped<IIntegrationEventHandlerAsync<BroadcastBeerWithdrawn>, PurchaseOrderSaga>();
+		services.AddScoped<IDomainEventHandlerAsync<SalesOrderCreated>, PurchaseOrderSaga>();
 
 		return services;
 	}
