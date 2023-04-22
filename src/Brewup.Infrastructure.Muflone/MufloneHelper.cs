@@ -1,4 +1,5 @@
-﻿using Brewup.Modules.Sales.Infrastructure.Consumers.Events;
+﻿using Brewup.Modules.Sales.Infrastructure.Consumers.Commands;
+using Brewup.Modules.Sales.Infrastructure.Consumers.Events;
 using Brewup.Modules.Warehouse.Infrastructure.Consumers.Commands;
 using Brewup.Modules.Warehouse.Infrastructure.Consumers.Events;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +41,8 @@ public static class MufloneHelper
 			new BeersAvailabilityAskedConsumer(serviceProvider, loggerFactory!),
 			new BroadcastBeerWithdrawnConsumer(serviceProvider, loggerFactory!),
 			new BeerWithdrawnConsumer(serviceProvider, loggerFactory!),
+
+			new CreateSalesOrderConsumer(repository!, loggerFactory!),
 			#endregion
 		};
 

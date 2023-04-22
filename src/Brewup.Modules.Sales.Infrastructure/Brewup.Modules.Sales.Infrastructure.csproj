@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\CQRS-Muflone\Muflone.Transport.InMemory\src\Muflone.Transport.InMemory\Muflone.Transport.InMemory.csproj" />
+    <ProjectReference Include="..\Brewup.Modules.Sales.Core\Brewup.Modules.Sales.Core.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Sales.Shared\Brewup.Modules.Sales.Shared.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Sales\Brewup.Modules.Sales.csproj" />
   </ItemGroup>
