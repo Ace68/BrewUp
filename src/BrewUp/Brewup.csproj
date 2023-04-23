@@ -26,6 +26,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Brewup.Infrastructure.Proxy\Brewup.Infrastructure.Proxy.csproj" />
 	  <ProjectReference Include="..\Brewup.Infrastructure.ReadModel.MongoDb\Brewup.Infrastructure.ReadModel.MongoDb.csproj" />
 	  <ProjectReference Include="..\Brewup.Modules.Production\Brewup.Modules.Production.csproj" />
 	  <ProjectReference Include="..\Brewup.Modules.Sales\Brewup.Modules.Sales.csproj" />

@@ -15,7 +15,7 @@ public class BrewupProxy
 		_warehouseOrchestrator = warehouseOrchestrator ?? throw new ArgumentNullException(nameof(warehouseOrchestrator));
 	}
 
-	public async Task WithdrawalBeerFromWarehouseAsync(WarehouseId warehouseId, IEnumerable<BeerToDrawn> beersToDrawn,
-		CancellationToken cancellationToken) =>
+	internal async Task<IEnumerable<BeerWithdrawn>> WithdrawalBeerFromWarehouseAsync(WarehouseId warehouseId,
+		IEnumerable<BeerToDrawn> beersToDrawn, CancellationToken cancellationToken) =>
 		await _warehouseOrchestrator.WithdrawalBeerFromWarehouseAsync(warehouseId, beersToDrawn, cancellationToken);
 }

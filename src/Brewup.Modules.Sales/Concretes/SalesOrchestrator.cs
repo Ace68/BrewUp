@@ -1,6 +1,6 @@
 ﻿using Brewup.Modules.Sales.Abstracts;
-using Brewup.Modules.Sales.Sagas;
 using Brewup.Modules.Sales.Shared.Dtos;
+using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Shared.Concretes;
 using Microsoft.Extensions.Logging;
 
@@ -9,17 +9,15 @@ namespace Brewup.Modules.Sales.Concretes;
 internal sealed class SalesOrchestrator : ISalesOrchestrator
 {
 	private readonly ILogger _logger;
-	private readonly PurchaseOrderSaga _purchaseOrderSaga;
 
 
-	public SalesOrchestrator(ILoggerFactory loggerFactory,
-		PurchaseOrderSaga purchaseOrderSaga)
+	public SalesOrchestrator(ILoggerFactory loggerFactory)
 	{
-		_purchaseOrderSaga = purchaseOrderSaga ?? throw new ArgumentNullException(nameof(purchaseOrderSaga));
 		_logger = loggerFactory.CreateLogger(GetType());
 	}
 
-	public async Task<string> AddOrderAsync(SalesOrderJson orderToAdd, CancellationToken cancellationToken)
+	public async Task<string> CreateSalesOrderAsync(SalesOrderJson orderToAdd, IEnumerable<BeerWithdrawn> beersWithdrawn,
+		CancellationToken cancellationToken)
 	{
 		try
 		{
@@ -29,7 +27,7 @@ internal sealed class SalesOrchestrator : ISalesOrchestrator
 			// Verify that BeerId, CustomerId, etc. are valid
 
 			// Start Saga here!
-			await _purchaseOrderSaga.StartAsync(orderToAdd, cancellationToken);
+
 
 			return orderToAdd.OrderId;
 		}

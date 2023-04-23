@@ -1,5 +1,5 @@
-﻿using Brewup.Modules.Sales;
-using Brewup.Modules.Sales.Endpoints;
+﻿using Brewup.Infrastructure.Proxy.Endpoints;
+using Brewup.Modules.Sales;
 
 namespace Brewup.Modules;
 
@@ -18,7 +18,7 @@ public class SalesModule : IModule
 		var mapGroup = endpoints.MapGroup("v1/sales")
 			.WithTags("Sales");
 
-		mapGroup.MapPost("", SalesEndpoints.HandleAddOrder)
+		mapGroup.MapPost("", ProxyEndpoints.HandleAddOrder)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("AddOrder");
 	}

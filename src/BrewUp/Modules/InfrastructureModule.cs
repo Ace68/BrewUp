@@ -1,5 +1,5 @@
-﻿using Brewup.Infrastructure.ReadModel.MongoDb;
-using Brewup.Modules.Sales.Sagas;
+﻿using Brewup.Infrastructure.Proxy.Concretes;
+using Brewup.Infrastructure.ReadModel.MongoDb;
 using Brewup.Shared.Configuration;
 
 namespace Brewup.Modules;
