@@ -18,7 +18,7 @@ public class SalesOrder : ModelBase
 	protected SalesOrder()
 	{ }
 
-	internal static SalesOrder CreateSalesOrder(OrderId orderId, OrderNumber orderNumber, OrderDate orderDate,
+	public static SalesOrder CreateSalesOrder(OrderId orderId, OrderNumber orderNumber, OrderDate orderDate,
 		CustomerId customerId, CustomerName customerName, TotalAmount totalAmount)
 	{
 		var salesOrder = new SalesOrder(orderId.Value.ToString(), orderNumber.Value, orderDate.Value, customerId.Value,
@@ -29,6 +29,8 @@ public class SalesOrder : ModelBase
 
 	private SalesOrder(string orderId, string orderNumber, DateTime orderDate, string customerId, string customerName, double totalAmount)
 	{
+		Id = orderId;
+
 		OrderId = orderId;
 		OrderNumber = orderNumber;
 		OrderDate = orderDate;
