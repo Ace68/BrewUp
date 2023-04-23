@@ -8,15 +8,12 @@
 
     <ItemGroup>
       <Folder Include="Endpoints" />
-      <Folder Include="EventsHandler\" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
-      <PackageReference Include="Muflone" Version="6.2.0" />
-      <PackageReference Include="Muflone.Saga" Version="6.2.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -26,7 +23,7 @@
     </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Brewup.Modules.Sales.Fitness.Tests"/>
+    <InternalsVisibleTo Include="Brewup.Modules.Sales.Fitness.Tests" />
   </ItemGroup>
 
 </Project>

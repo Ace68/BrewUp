@@ -1,10 +1,3 @@
-﻿using Muflone.Core;
+﻿namespace Brewup.Modules.Shared.CustomTypes;
 
-namespace Brewup.Modules.Shared.CustomTypes;
-
-public sealed class WarehouseId : DomainId
-{
-	public WarehouseId(Guid value) : base(value)
-	{
-	}
-}
+public record WarehouseId(Guid Value);

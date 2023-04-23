@@ -57,6 +57,27 @@ internal sealed class BeerService : WarehouseBaseService, IBeerService
 		}
 	}
 
+	public async Task UpdateSalesCommittesAsync(BeerId beerId, SalesCommitted salesCommitted, CancellationToken cancellationToken)
+	{
+		try
+		{
+			var beer = await Persister.GetByIdAsync<WarehouseBeer>(beerId.ToString(), cancellationToken);
+
+			beer.UpdateSalesCommitted(salesCommitted);
+			var propertiesToUpdate = new Dictionary<string, object>
+			{
+				{ "SalesCommitted", beer.SalesCommitted },
+				{ "Availability", beer.Availability }
+			};
+			await Persister.UpdateOneAsync<WarehouseBeer>(beer.Id, propertiesToUpdate, cancellationToken);
+		}
+		catch (Exception ex)
+		{
+			Logger.LogError(CommonServices.GetDefaultErrorTrace(ex));
+			throw;
+		}
+	}
+
 	public async Task<BeerJson> GetBeerAsync(BeerId beerId, CancellationToken cancellationToken)
 	{
 		try

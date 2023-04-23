@@ -33,9 +33,19 @@ public class WarehouseBeer : ModelBase
 		Availability = availability.Value;
 	}
 
+	public void UpdateSalesCommitted(SalesCommitted salesCommitted)
+	{
+		SalesCommitted += salesCommitted.Value;
+		Availability -= salesCommitted.Value;
+	}
+
 	public BeerJson ToJson() => new()
 	{
 		BeerId = Id,
-		BeerName = BeerName
+		BeerName = BeerName,
+
+		Stock = Stock,
+		Availability = Availability,
+		SalesCommitted = SalesCommitted
 	};
 }

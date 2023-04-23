@@ -10,7 +10,8 @@ namespace Brewup.Modules.Sales.Fitness.Tests
 {
 	public class SalesFitnessTest
 	{
-		private static readonly Architecture Architecture = new ArchLoader().LoadAssemblies(typeof(ISalesOrchestrator).Assembly).Build();
+		private static readonly Architecture Architecture = new ArchLoader().LoadAssemblies(typeof(ISalesOrchestrator).Assembly)
+			.Build();
 
 		private readonly IObjectProvider<IType> _forbiddenLayer = Types().
 			That().

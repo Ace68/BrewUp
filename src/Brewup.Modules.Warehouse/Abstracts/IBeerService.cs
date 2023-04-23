@@ -8,6 +8,7 @@ public interface IBeerService
 	Task<string> CreateBeerAsync(BeerId beerId, BeerName beerName, CancellationToken cancellationToken);
 	Task UpdateStoreQuantityAsync(BeerId beerId, Stock stock, Availability availability,
 		CancellationToken cancellationToken);
+	Task UpdateSalesCommittesAsync(BeerId beerId, SalesCommitted salesCommitted, CancellationToken cancellationToken);
 
 	Task<BeerJson> GetBeerAsync(BeerId beerId, CancellationToken cancellationToken);
 }

@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Brewup.Modules.Sales.Infrastructure\Brewup.Modules.Sales.Infrastructure.csproj" />
-    <ProjectReference Include="..\Brewup.Modules.Warehouse.Infrastructure\Brewup.Modules.Warehouse.Infrastructure.csproj" />
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
   </ItemGroup>
 

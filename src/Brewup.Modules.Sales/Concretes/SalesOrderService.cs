@@ -1,7 +1,7 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
 using Brewup.Infrastructure.ReadModel.Models;
 using Brewup.Modules.Sales.Abstracts;
-using Brewup.Modules.Sales.Shared.DomainEvents;
+using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Shared.Concretes;
 using Microsoft.Extensions.Logging;
 
@@ -14,16 +14,17 @@ internal sealed class SalesOrderService : PurchaseBaseService, ISalesOrderServic
 	{
 	}
 
-	public async Task AddOrderAsync(SalesOrderCreated @event, CancellationToken cancellationToken)
+	public async Task AddOrderAsync(OrderId orderId, OrderNumber orderNumber, OrderDate orderDate,
+		CustomerId customerId, CustomerName customerName, TotalAmount totalAmount, CancellationToken cancellationToken)
 	{
 		try
 		{
-			var salesOrder = await Persister.GetByIdAsync<SalesOrder>(@event.OrderId.Value.ToString(), cancellationToken);
+			var salesOrder = await Persister.GetByIdAsync<SalesOrder>(orderId.Value.ToString(), cancellationToken);
 			if (!string.IsNullOrWhiteSpace(salesOrder.OrderId))
 				return;
 
-			salesOrder = SalesOrder.CreateSalesOrder(@event.OrderId, @event.OrderNumber, @event.OrderDate, @event.CustomerId,
-								@event.CustomerName, @event.TotalAmount);
+			salesOrder = SalesOrder.CreateSalesOrder(orderId, orderNumber, orderDate, customerId,
+								customerName, totalAmount);
 			await Persister.InsertAsync(salesOrder, cancellationToken);
 		}
 		catch (Exception ex)
