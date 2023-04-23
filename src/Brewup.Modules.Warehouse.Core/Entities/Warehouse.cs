@@ -43,7 +43,7 @@ public class Warehouse : AggregateRoot
 	internal void AddBeerDeposit(MovementId movementId, MovementDate movementDate, CausalId causalId,
 		CausalDescription causalDescription, IEnumerable<BeerDepositRow> rows)
 	{
-		var beersAvailability = new List<BeerAvailabilityUpdated>();
+		var beersAvailability = Enumerable.Empty<BeerAvailabilityUpdated>();
 		foreach (var row in rows)
 		{
 			var beer = _beers.FirstOrDefault(x => x.BeerId == row.BeerId);
@@ -61,14 +61,17 @@ public class Warehouse : AggregateRoot
 				supplierOrdered = beer.GetSupplierOrdered();
 			}
 
-			beersAvailability.Add(new BeerAvailabilityUpdated(row.BeerId,
-				row.BeerName,
-				row.MovementQuantity,
-				stock,
-				availability,
-				productionCommitted,
-				salesCommitted,
-				supplierOrdered));
+			beersAvailability = beersAvailability.Concat(new List<BeerAvailabilityUpdated>
+			{
+				new (row.BeerId,
+					row.BeerName,
+					row.MovementQuantity,
+					stock,
+					availability,
+					productionCommitted,
+					salesCommitted,
+					supplierOrdered)
+			});
 		}
 
 		RaiseEvent(new BeerDepositAdded(_warehouseId, movementId, movementDate, causalId, causalDescription, beersAvailability));

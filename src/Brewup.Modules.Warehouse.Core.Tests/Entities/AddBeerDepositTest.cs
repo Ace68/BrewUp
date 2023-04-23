@@ -32,9 +32,12 @@ public sealed class AddBeerDepositTest : CommandSpecification<AddBeerDeposit>
 		{
 			new(_beerId, _beerName, _movementQuantity)
 		});
-		_availabilities = _availabilities.Append(new BeerAvailabilityUpdated(_beerId, _beerName, _movementQuantity,
-			new Stock(10), new Availability(10), new ProductionCommitted(0), new SalesCommitted(0),
-			new SupplierOrdered(0)));
+
+		_availabilities = _availabilities.Concat(new List<BeerAvailabilityUpdated>
+		{
+			new(_beerId, _beerName, _movementQuantity, new Stock(10), new Availability(10), new ProductionCommitted(0),
+								new SalesCommitted(0), new SupplierOrdered(0))
+		});
 	}
 
 	protected override IEnumerable<DomainEvent> Given()

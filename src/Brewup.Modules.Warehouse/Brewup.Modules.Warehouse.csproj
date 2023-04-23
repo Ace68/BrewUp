@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Brewup.Shared\Brewup.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Brewup.Modules.Warehouse.Fitness.Tests"/>
+  </ItemGroup>
+
 </Project>

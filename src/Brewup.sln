@@ -71,6 +71,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brewup.Modules.Shared", "Br
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Sales.Fitness.Tests", "Brewup.Modules.Sales.Fitness.Tests\Brewup.Modules.Sales.Fitness.Tests.csproj", "{0A3A3162-94CA-4BFE-951B-FF9D0219473E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brewup.Modules.Warehouse.Fitness.Tests", "Brewup.Modules.Warehouse.Fitness.Tests\Brewup.Modules.Warehouse.Fitness.Tests.csproj", "{201EF66E-359B-4CEC-82E7-E90E1BB5CE5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,10 @@ Global
 		{0A3A3162-94CA-4BFE-951B-FF9D0219473E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A3A3162-94CA-4BFE-951B-FF9D0219473E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A3A3162-94CA-4BFE-951B-FF9D0219473E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{201EF66E-359B-4CEC-82E7-E90E1BB5CE5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{201EF66E-359B-4CEC-82E7-E90E1BB5CE5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{201EF66E-359B-4CEC-82E7-E90E1BB5CE5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{201EF66E-359B-4CEC-82E7-E90E1BB5CE5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -191,6 +197,7 @@ Global
 		{79246628-94F7-466E-AE92-F590A024EB1F} = {0282FE52-D0DB-4537-8FAA-1BC3A6A6FA3F}
 		{ABD3AB0A-BCFA-499A-8368-A7AB76791970} = {79246628-94F7-466E-AE92-F590A024EB1F}
 		{0A3A3162-94CA-4BFE-951B-FF9D0219473E} = {3BB89329-DDCD-4728-8408-4E1B229A9293}
+		{201EF66E-359B-4CEC-82E7-E90E1BB5CE5E} = {DFDBB64F-C995-4212-84A6-BB2334B9489B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F9BD165F-4738-42F5-AC24-8DAE7B17192D}
