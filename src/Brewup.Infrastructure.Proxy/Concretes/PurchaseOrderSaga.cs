@@ -19,5 +19,7 @@ public sealed class PurchaseOrderSaga : IPurchaseOrderSaga
 						new WarehouseId(new Guid(orderToAdd.WarehouseId)),
 						orderToAdd.Rows.Select(r => new BeerToDrawn(new BeerId(r.BeerId), new Quantity(r.QuantityOrdered), new Stock(0), new Availability(0))),
 						cancellationToken);
+
+		var orderId = await _brewupProxy.CreateSalesOrderAsync(orderToAdd, beersWithdrawn, cancellationToken);
 	}
 }

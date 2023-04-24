@@ -1,4 +1,5 @@
 ﻿using Brewup.Modules.Sales.Abstracts;
+using Brewup.Modules.Sales.Shared.Dtos;
 using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Modules.Warehouse.Abstracts;
 
@@ -18,4 +19,8 @@ public class BrewupProxy
 	internal async Task<IEnumerable<BeerWithdrawn>> WithdrawalBeerFromWarehouseAsync(WarehouseId warehouseId,
 		IEnumerable<BeerToDrawn> beersToDrawn, CancellationToken cancellationToken) =>
 		await _warehouseOrchestrator.WithdrawalBeerFromWarehouseAsync(warehouseId, beersToDrawn, cancellationToken);
+
+	internal async Task<string> CreateSalesOrderAsync(SalesOrderJson orderToAdd, IEnumerable<BeerWithdrawn> beersWithdrawn,
+				CancellationToken cancellationToken) =>
+		await _salesOrchestrator.CreateSalesOrderAsync(orderToAdd, beersWithdrawn, cancellationToken);
 }

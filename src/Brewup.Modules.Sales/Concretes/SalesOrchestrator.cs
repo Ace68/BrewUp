@@ -21,12 +21,9 @@ internal sealed class SalesOrchestrator : ISalesOrchestrator
 	{
 		try
 		{
-			if (string.IsNullOrEmpty(orderToAdd.OrderId))
-				orderToAdd.OrderId = Guid.NewGuid().ToString();
 
-			// Verify that BeerId, CustomerId, etc. are valid
 
-			// Start Saga here!
+
 
 
 			return orderToAdd.OrderId;
