@@ -40,7 +40,7 @@ internal sealed class BeerService : WarehouseBaseService, IBeerService
 	{
 		try
 		{
-			var beer = await Persister.GetByIdAsync<WarehouseBeer>(beerId.ToString(), cancellationToken);
+			var beer = await Persister.GetByIdAsync<WarehouseBeer>(beerId.Value, cancellationToken);
 
 			beer.UpdateStoreQuantity(stock, availability);
 			var propertiesToUpdate = new Dictionary<string, object>

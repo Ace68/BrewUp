@@ -72,6 +72,10 @@ public class PurchaseOrderSaga : Saga<SalesSagaState>,
 		if (sagaState is null)
 			return;
 
+		// Verify availability
+		// With availability we create order
+		// Without availability we send a message to the customer
+
 		var withdrawalFromWarehouse = new WithdrawalFromWarehouse(@event.WarehouseId, correlationId,
 			sagaState.Order.Rows.Select(r => r.ToBeerToDrawn()));
 
