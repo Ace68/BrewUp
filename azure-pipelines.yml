@@ -21,9 +21,12 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/src/Dockerfile'
+        containerRegistry: 'brewUp'
+        repository: 'monolithic'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/Dockerfile'
         tags: |
           $(tag)
+        
+
