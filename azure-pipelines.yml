@@ -1,0 +1,32 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- monolithic-by-events
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'brewUp'
+        repository: 'monolithic'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/src/Dockerfile'
+        tags: |
+          $(tag)
+        
+
