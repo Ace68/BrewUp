@@ -21,7 +21,7 @@ public class InfrastructureModule : IModule
 		builder.Services.AddMufloneEventStore(builder.Configuration["BrewUp:EventStoreSettings:ConnectionString"]!);
 		builder.Services.AddMuflone();
 
-		builder.Services.AddScoped<PurchaseOrderSaga>();
+		builder.Services.AddScoped<SalesOrderSaga>();
 	}
 
 	public void MapEndpoints(IEndpointRouteBuilder endpoints)

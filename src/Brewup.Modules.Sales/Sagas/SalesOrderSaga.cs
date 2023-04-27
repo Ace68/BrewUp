@@ -14,13 +14,13 @@ using Muflone.Saga.Persistence;
 
 namespace Brewup.Modules.Sales.Sagas;
 
-public class PurchaseOrderSaga : Saga<SalesSagaState>,
+public class SalesOrderSaga : Saga<SalesSagaState>,
 	ISagaStartedByAsync<LaunchSalesOrderSaga>,
 	IDomainEventHandlerAsync<BeersAvailabilityAsked>,
 	IIntegrationEventHandlerAsync<BroadcastBeerWithdrawn>,
 	IDomainEventHandlerAsync<SalesOrderCreated>
 {
-	public PurchaseOrderSaga(IServiceBus serviceBus,
+	public SalesOrderSaga(IServiceBus serviceBus,
 		ISagaRepository repository,
 		ILoggerFactory loggerFactory) : base(serviceBus, repository, loggerFactory)
 	{

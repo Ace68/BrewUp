@@ -11,11 +11,11 @@ namespace Brewup.Modules.Sales.Concretes;
 internal sealed class SalesOrchestrator : ISalesOrchestrator
 {
 	private readonly ILogger _logger;
-	private readonly PurchaseOrderSaga _purchaseOrderSaga;
+	private readonly SalesOrderSaga _purchaseOrderSaga;
 	private readonly ISalesOrderService _salesOrderService;
 
 	public SalesOrchestrator(ILoggerFactory loggerFactory,
-		PurchaseOrderSaga purchaseOrderSaga,
+		SalesOrderSaga purchaseOrderSaga,
 		ISalesOrderService salesOrderService)
 	{
 		_purchaseOrderSaga = purchaseOrderSaga ?? throw new ArgumentNullException(nameof(purchaseOrderSaga));

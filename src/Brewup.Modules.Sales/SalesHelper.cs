@@ -23,9 +23,9 @@ public static class SalesHelper
 		services.AddScoped<ISalesOrderService, SalesOrderService>();
 		services.AddScoped<ISalesOrchestrator, SalesOrchestrator>();
 
-		services.AddScoped<IDomainEventHandlerAsync<BeersAvailabilityAsked>, PurchaseOrderSaga>();
-		services.AddScoped<IIntegrationEventHandlerAsync<BroadcastBeerWithdrawn>, PurchaseOrderSaga>();
-		services.AddScoped<IDomainEventHandlerAsync<SalesOrderCreated>, PurchaseOrderSaga>();
+		services.AddScoped<IDomainEventHandlerAsync<BeersAvailabilityAsked>, SalesOrderSaga>();
+		services.AddScoped<IIntegrationEventHandlerAsync<BroadcastBeerWithdrawn>, SalesOrderSaga>();
+		services.AddScoped<IDomainEventHandlerAsync<SalesOrderCreated>, SalesOrderSaga>();
 		services.AddScoped<IDomainEventHandlerAsync<SalesOrderCreated>, SalesOrderCreatedEventHandler>();
 
 		return services;
