@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Endpoints" />
       <Folder Include="EventsHandler\" />
     </ItemGroup>
 
@@ -26,7 +25,7 @@
     </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Brewup.Modules.Sales.Fitness.Tests"/>
+    <InternalsVisibleTo Include="Brewup.Modules.Sales.Fitness.Tests" />
   </ItemGroup>
 
 </Project>

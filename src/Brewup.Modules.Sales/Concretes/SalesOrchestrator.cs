@@ -12,12 +12,14 @@ internal sealed class SalesOrchestrator : ISalesOrchestrator
 {
 	private readonly ILogger _logger;
 	private readonly PurchaseOrderSaga _purchaseOrderSaga;
-
+	private readonly ISalesOrderService _salesOrderService;
 
 	public SalesOrchestrator(ILoggerFactory loggerFactory,
-		PurchaseOrderSaga purchaseOrderSaga)
+		PurchaseOrderSaga purchaseOrderSaga,
+		ISalesOrderService salesOrderService)
 	{
 		_purchaseOrderSaga = purchaseOrderSaga ?? throw new ArgumentNullException(nameof(purchaseOrderSaga));
+		_salesOrderService = salesOrderService ?? throw new ArgumentNullException(nameof(salesOrderService));
 		_logger = loggerFactory.CreateLogger(GetType());
 	}
 
@@ -51,4 +53,7 @@ internal sealed class SalesOrchestrator : ISalesOrchestrator
 			throw;
 		}
 	}
+
+	public Task<IEnumerable<SalesOrderJson>> GetSalesOrdersAsync(CancellationToken cancellationToken) =>
+		_salesOrderService.GetSalesOrdersAsync(cancellationToken);
 }

@@ -3,6 +3,7 @@ using ArchUnitNET.Fluent;
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
 using Brewup.Modules.Warehouse.Abstracts;
+
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace Brewup.Modules.Warehouse.Fitness.Tests

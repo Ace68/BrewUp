@@ -24,4 +24,14 @@ public static class SalesEndpoints
 
 		return Results.Ok();
 	}
+
+	public static async Task<IResult> HandleGetOrders(
+		ISalesOrchestrator salesOrchestrator,
+		CancellationToken cancellationToken
+	)
+	{
+		var salesOrders = await salesOrchestrator.GetSalesOrdersAsync(cancellationToken);
+
+		return Results.Ok(salesOrders);
+	}
 }

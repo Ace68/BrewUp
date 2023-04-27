@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Brewup.Modules.Sales.Shared\Brewup.Modules.Sales.Shared.csproj" />
     <ProjectReference Include="..\Brewup.Modules.Warehouse.Shared\Brewup.Modules.Warehouse.Shared.csproj" />
   </ItemGroup>
 

@@ -19,7 +19,13 @@ public class SalesModule : IModule
 			.WithTags("Sales");
 
 		mapGroup.MapPost("", SalesEndpoints.HandleAddOrder)
+			.Produces(StatusCodes.Status200OK)
 			.Produces(StatusCodes.Status400BadRequest)
 			.WithName("AddOrder");
+
+		mapGroup.MapGet("", SalesEndpoints.HandleGetOrders)
+			.Produces(StatusCodes.Status200OK)
+			.Produces(StatusCodes.Status400BadRequest)
+			.WithName("GetSalesOrders");
 	}
 }

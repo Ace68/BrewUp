@@ -1,4 +1,5 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
+using Brewup.Modules.Sales.Shared.Dtos;
 using Brewup.Modules.Shared.CustomTypes;
 
 namespace Brewup.Infrastructure.ReadModel.Models;
@@ -37,5 +38,18 @@ public class SalesOrder : ModelBase
 		CustomerId = customerId;
 		CustomerName = customerName;
 		TotalAmount = totalAmount;
+	}
+
+	public SalesOrderJson ToJson()
+	{
+		return new SalesOrderJson
+		{
+			OrderId = OrderId,
+			OrderNumber = OrderNumber,
+			OrderDate = OrderDate,
+			CustomerId = CustomerId,
+			CustomerName = CustomerName,
+			TotalAmount = TotalAmount
+		};
 	}
 }
