@@ -26,7 +26,6 @@ stages:
         repository: 'monolithic'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/Dockerfile'
-        tags: |
-          $(tag)
+        tags: $(Build.BuildNumber)
         
 
