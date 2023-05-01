@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventstore
+  namespace: {{ .Values.global.namespaceOverride }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: eventstore
+  template:
+    metadata:
+      labels:
+        app: eventstore
+    spec:
+      containers:
+        - name: eventstore-production
+          image: eventstore/eventstore:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: EVENTSTORE_CLUSTER_SIZE
+              value: "1"
+            - name: EVENTSTORE_RUN_PROJECTIONS
+              value: All
+            - name: EVENTSTORE_START_STANDARD_PROJECTIONS
+              value: "true"
+            - name: EVENTSTORE_EXT_TCP_PORT
+              value: "1113"
+            - name: EVENTSTORE_HTTP_PORT
+              value: "2113"
+            - name: EVENTSTORE_INSECURE
+              value: "true"
+            - name: EVENTSTORE_ENABLE_EXTERNAL_TCP
+              value: "true"
+            - name: EVENTSTORE_ENABLE_ATOM_PUB_OVER_HTTP
+              value: "true"
+            - name: EVENTSTORE_ALLOW_UNKNOWN_OPTIONS
+              value: "true"
+          ports:
+            - containerPort: 1113
+            - containerPort: 2113
+      restartPolicy: Always

@@ -5,6 +5,8 @@
 
 */.idea
 
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo
