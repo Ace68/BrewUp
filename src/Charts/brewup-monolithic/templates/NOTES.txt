@@ -1,4 +1,3 @@
 In order to get the mongodb connection string, run the following command:
-'''
+
 kubectl get services mongodb --output jsonpath="mongodb://{{.Values.mongodb.auth.username}}:{{.Values.mongodb.auth.password}}@{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}/{{.Values.mongodb.auth.database}}}" -n {{ .Values.global.namespaceOverride }}
-'''
