@@ -28,11 +28,6 @@ public class WarehouseModule : IModule
 			.Produces(StatusCodes.Status200OK)
 			.WithName("AddBeerDeposit");
 
-		mapGroup.MapGet("", () => Results.Ok())
-			.Produces(StatusCodes.Status400BadRequest)
-			.Produces(StatusCodes.Status200OK)
-			.WithName("GetBeersIntoWarehouses");
-
 		//mapGroup.MapPost("/availability", WarehouseEndpoints.HandleCreateAvailability)
 		//	.Produces(StatusCodes.Status400BadRequest)
 		//	.WithName("CreateAvailability");
