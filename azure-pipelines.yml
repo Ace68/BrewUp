@@ -22,7 +22,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'brewUp'
+        containerRegistry: 'brewUpRegistryConnection'
         repository: 'monolithic'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/src/Dockerfile'
