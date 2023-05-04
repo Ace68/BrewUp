@@ -1,0 +1,10 @@
+apiVersion: v2
+name: brewup-monolithic
+description: An Helm Chart for deploy dependencies of BrewUp Monolithic version
+type: application
+version: 0.1.0
+
+dependencies:
+  - name: "mongodb"
+    version: 13.10.1
+    repository: https://charts.bitnami.com/bitnami

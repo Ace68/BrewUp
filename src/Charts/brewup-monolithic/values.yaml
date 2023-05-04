@@ -1,0 +1,12 @@
+# Do not use those values in production! This is just for testing purposes. Passwords shouldn't stay here.
+global:
+    namespaceOverride: brewup-monolithic
+mongodb:
+    architecture: "standalone"
+    auth:
+        rootPassword: "t00rM3Pswd"
+        username: "brewup"
+        password: "br3w4pPsWd"
+        database: "brewup-monolithic"
+    service:
+        type: LoadBalancer

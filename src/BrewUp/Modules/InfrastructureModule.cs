@@ -14,9 +14,11 @@ public class InfrastructureModule : IModule
 
 	public void RegisterModule(WebApplicationBuilder builder)
 	{
-		builder.Services.AddMongoDb(builder.Configuration.GetSection("BrewUp:MongoDbSettings").Get<MongoDbSettings>()!);
-		builder.Services.AddEventstoreMongoDb(builder.Configuration.GetSection("BrewUp:MongoDbSettings").Get<MongoDbSettings>()!);
-		builder.Services.AddMongoSagaStateRepository(new MongoSagaStateRepositoryOptions("mongodb://localhost", "BrewUp"));
+		var mongoSettings = builder.Configuration.GetSection("BrewUp:MongoDbSettings").Get<MongoDbSettings>()!;
+		
+		builder.Services.AddMongoDb(mongoSettings);
+		builder.Services.AddEventstoreMongoDb(mongoSettings);
+		builder.Services.AddMongoSagaStateRepository(new MongoSagaStateRepositoryOptions(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
 
 		builder.Services.AddMufloneEventStore(builder.Configuration["BrewUp:EventStoreSettings:ConnectionString"]!);
 		builder.Services.AddMuflone();

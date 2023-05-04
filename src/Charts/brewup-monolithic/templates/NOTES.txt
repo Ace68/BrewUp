@@ -1,0 +1,8 @@
+In order to get the mongodb connection string, run the following command:
+
+kubectl get services {{ .Release.Name }}-mongodb --output jsonpath="mongodb://{{.Values.mongodb.auth.username}}:{{.Values.mongodb.auth.password}}@{.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}/{{.Values.mongodb.auth.database}}" -n {{ .Values.global.namespaceOverride }}
+
+In order to get the eventStore connection string, run the following:
+
+kubectl get services eventstore --output jsonpath="{tcp://.status.loadBalancer.ingress[0].ip}:{.spec.ports[0].port}" -n {{ .Values.global.namespaceOverride }}
+kubectl get services eventstore --output jsonpath="{tcp://.status.loadBalancer.ingress[0].ip}:{.spec.ports[1].port}" -n {{ .Values.global.namespaceOverride }}
