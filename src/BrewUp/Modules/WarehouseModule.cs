@@ -20,11 +20,18 @@ public class WarehouseModule : IModule
 
 		mapGroup.MapPost("", WarehouseEndpoints.HandleCreateWarehouse)
 			.Produces(StatusCodes.Status400BadRequest)
+			.Produces(StatusCodes.Status200OK)
 			.WithName("CreateWarehouse");
 
 		mapGroup.MapPost("/deposit", WarehouseEndpoints.HandleAddBeerDeposit)
 			.Produces(StatusCodes.Status400BadRequest)
+			.Produces(StatusCodes.Status200OK)
 			.WithName("AddBeerDeposit");
+
+		mapGroup.MapGet("", () => Results.Ok())
+			.Produces(StatusCodes.Status400BadRequest)
+			.Produces(StatusCodes.Status200OK)
+			.WithName("GetBeersIntoWarehouses");
 
 		//mapGroup.MapPost("/availability", WarehouseEndpoints.HandleCreateAvailability)
 		//	.Produces(StatusCodes.Status400BadRequest)
