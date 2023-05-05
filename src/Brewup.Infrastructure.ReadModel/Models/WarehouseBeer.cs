@@ -36,6 +36,10 @@ public class WarehouseBeer : ModelBase
 	public BeerJson ToJson() => new()
 	{
 		BeerId = Id,
-		BeerName = BeerName
+		BeerName = BeerName,
+
+		Stock = Stock,
+		Availability = Availability,
+		SalesCommitted = SalesCommitted
 	};
 }

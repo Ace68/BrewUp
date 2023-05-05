@@ -55,4 +55,33 @@ public static class WarehouseEndpoints
 		return Results.Accepted();
 	}
 
+	public static async Task<IResult> HandleGetBeers(
+		IWarehouseOrchestrator warehouseOrchestrator,
+		CancellationToken cancellationToken)
+	{
+		try
+		{
+			var beers = await warehouseOrchestrator.GetBeersAsync(cancellationToken);
+			return Results.Ok(beers);
+		}
+		catch (Exception ex)
+		{
+			return Results.BadRequest(ex.Message);
+		}
+	}
+
+	public static async Task<IResult> HandleGetWarehouses(
+		IWarehouseOrchestrator warehouseOrchestrator,
+		CancellationToken cancellationToken)
+	{
+		try
+		{
+			var beers = await warehouseOrchestrator.GetBeersAsync(cancellationToken);
+			return Results.Ok(beers);
+		}
+		catch (Exception ex)
+		{
+			return Results.BadRequest(ex.Message);
+		}
+	}
 }

@@ -1,5 +1,6 @@
 ﻿using Brewup.Infrastructure.ReadModel.Abstracts;
 using Brewup.Modules.Shared.CustomTypes;
+using Brewup.Modules.Warehouse.Shared.Dtos;
 
 namespace Brewup.Infrastructure.ReadModel.Models;
 
@@ -18,4 +19,10 @@ public class WarehouseWarehouse : ModelBase
 		Id = warehouseId;
 		WarehouseName = warehouseName;
 	}
+
+	public WarehouseJson ToJson() => new()
+	{
+		WarehouseId = Id,
+		WarehouseName = WarehouseName
+	};
 }

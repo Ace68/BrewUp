@@ -70,4 +70,22 @@ internal sealed class BeerService : WarehouseBaseService, IBeerService
 			throw;
 		}
 	}
+
+	public async Task<IEnumerable<BeerJson>> GetBeersAsync(CancellationToken cancellationToken)
+	{
+		try
+		{
+			var beers = await Persister.FindAsync<WarehouseBeer>();
+			var beersArray = beers as WarehouseBeer[] ?? beers.ToArray();
+
+			return beersArray.Any()
+				? beersArray.Select(beer => beer.ToJson())
+				: Enumerable.Empty<BeerJson>();
+		}
+		catch (Exception ex)
+		{
+			Logger.LogError(CommonServices.GetDefaultErrorTrace(ex));
+			throw;
+		}
+	}
 }

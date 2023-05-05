@@ -10,4 +10,5 @@ public interface IBeerService
 		CancellationToken cancellationToken);
 
 	Task<BeerJson> GetBeerAsync(BeerId beerId, CancellationToken cancellationToken);
+	Task<IEnumerable<BeerJson>> GetBeersAsync(CancellationToken cancellationToken);
 }
