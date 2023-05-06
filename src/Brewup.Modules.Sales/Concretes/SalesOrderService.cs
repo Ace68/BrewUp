@@ -1,5 +1,4 @@
-﻿using Brewup.Infrastructure.ReadModel.Abstracts;
-using Brewup.Infrastructure.ReadModel.Models;
+﻿using Brewup.Infrastructure.ReadModel.Models;
 using Brewup.Modules.Sales.Abstracts;
 using Brewup.Modules.Sales.Shared.DomainEvents;
 using Brewup.Modules.Sales.Shared.Dtos;
@@ -8,10 +7,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Brewup.Modules.Sales.Concretes;
 
-internal sealed class SalesOrderService : PurchaseBaseService, ISalesOrderService
+internal sealed class SalesOrderService : SalesBaseService, ISalesOrderService
 {
-	public SalesOrderService(IPersister persister,
-		ILoggerFactory loggerFactory) : base(persister, loggerFactory)
+	public SalesOrderService(IServiceProvider serviceProvider,
+		ILoggerFactory loggerFactory) : base(serviceProvider, loggerFactory)
 	{
 	}
 

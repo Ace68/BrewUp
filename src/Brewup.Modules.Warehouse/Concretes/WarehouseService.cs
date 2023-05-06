@@ -1,5 +1,4 @@
-﻿using Brewup.Infrastructure.ReadModel.Abstracts;
-using Brewup.Infrastructure.ReadModel.Models;
+﻿using Brewup.Infrastructure.ReadModel.Models;
 using Brewup.Modules.Shared.CustomTypes;
 using Brewup.Modules.Warehouse.Abstracts;
 using Brewup.Modules.Warehouse.Shared.Dtos;
@@ -11,7 +10,7 @@ namespace Brewup.Modules.Warehouse.Concretes;
 internal sealed class WarehouseService : WarehouseBaseService, IWarehouseService
 {
 	public WarehouseService(ILoggerFactory loggerFactory,
-		IPersister persister) : base(loggerFactory, persister)
+		IServiceProvider serviceProvider) : base(loggerFactory, serviceProvider)
 	{
 	}
 
@@ -20,7 +19,7 @@ internal sealed class WarehouseService : WarehouseBaseService, IWarehouseService
 	{
 		try
 		{
-			var warehouse = Infrastructure.ReadModel.Models.WarehouseWarehouse.Create(warehouseId, warehouseName);
+			var warehouse = WarehouseWarehouse.Create(warehouseId, warehouseName);
 
 			await Persister.InsertAsync(warehouse, cancellationToken);
 		}

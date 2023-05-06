@@ -7,16 +7,19 @@ using System.Linq.Expressions;
 
 namespace Brewup.Infrastructure.ReadModel.MongoDb.Repositories;
 
-public sealed class Persister : IPersister
+public sealed class SalesPersister : IPersister
 {
 	private readonly IMongoDatabase _mongoDatabase;
 	private readonly ILogger _logger;
 
-	public Persister(IMongoDatabase mongoDatabase, ILoggerFactory loggerFactory)
+	public SalesPersister(IMongoClient mongoClient,
+		ILoggerFactory loggerFactory)
 	{
-		_mongoDatabase = mongoDatabase;
+		_mongoDatabase = mongoClient.GetDatabase("SalesReadModel");
 		_logger = loggerFactory.CreateLogger(GetType());
 	}
+
+	public string Type => "SalesPersister";
 
 	public async Task<T> GetByIdAsync<T>(string id, CancellationToken cancellationToken) where T : ModelBase
 	{

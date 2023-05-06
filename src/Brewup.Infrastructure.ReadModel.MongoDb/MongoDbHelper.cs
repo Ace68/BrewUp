@@ -23,10 +23,10 @@ public static class MongoDbHelper
 		services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoDbParameter.ConnectionString));
 		services.AddScoped(provider =>
 			provider.GetService<IMongoClient>()
-				?.GetDatabase(mongoDbParameter.DatabaseName)
 				.WithWriteConcern(WriteConcern.W1));
 
-		services.AddScoped<IPersister, Persister>();
+		services.AddScoped<IPersister, SalesPersister>();
+		services.AddScoped<IPersister, WarehousesPersister>();
 
 		return services;
 	}

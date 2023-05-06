@@ -4,6 +4,7 @@ namespace Brewup.Infrastructure.ReadModel.Abstracts;
 
 public interface IPersister
 {
+	string Type { get; }
 	Task<T> GetByIdAsync<T>(string id, CancellationToken cancellationToken) where T : ModelBase;
 	Task InsertAsync<T>(T dtoToInsert, CancellationToken cancellationToken) where T : ModelBase;
 	Task ReplaceAsync<T>(T dtoToUpdate, CancellationToken cancellationToken) where T : ModelBase;
