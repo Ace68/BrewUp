@@ -13,7 +13,7 @@ public abstract class SalesBaseService
 		ILoggerFactory loggerFactory)
 	{
 		var persisters = serviceProvider.GetServices<IPersister>();
-		Persister = persisters.FirstOrDefault(x => x.Type == "SalesPersiter");
+		Persister = persisters.FirstOrDefault(x => x.Type == "Persiter");
 		Logger = loggerFactory.CreateLogger(GetType());
 	}
 }

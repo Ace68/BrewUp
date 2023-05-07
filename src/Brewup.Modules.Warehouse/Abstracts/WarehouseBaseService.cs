@@ -12,7 +12,7 @@ public abstract class WarehouseBaseService
 	protected WarehouseBaseService(ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
 	{
 		var persisters = serviceProvider.GetServices<IPersister>();
-		Persister = persisters.FirstOrDefault(x => x.Type == "WarehousesPersister");
+		Persister = persisters.FirstOrDefault(x => x.Type == "Persister");
 		Logger = loggerFactory.CreateLogger(GetType());
 	}
 }

@@ -20,7 +20,9 @@ public static class ModuleExtensions
 
 	public static WebApplication MapEndpoints(this WebApplication app)
 	{
-		foreach (var module in RegisteredModules)
+		foreach (var module in RegisteredModules
+					 .Where(m => m.IsEnabled)
+					 .OrderBy(m => m.Order))
 		{
 			module.MapEndpoints(app);
 		}

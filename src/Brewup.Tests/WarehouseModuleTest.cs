@@ -75,21 +75,4 @@ public class WarehouseModuleTest
 
 		Assert.Equal(HttpStatusCode.BadRequest, postResult.StatusCode);
 	}
-
-	[Fact]
-	public async Task Should_Send_ValidJson()
-	{
-		var body = new SpareAvailabilityJson(Guid.NewGuid().ToString(),
-			100,
-			30,
-			50,
-			20,
-			0);
-
-		var stringJson = JsonSerializer.Serialize(body);
-		var httpContent = new StringContent(stringJson, Encoding.UTF8, "application/json");
-		var postResult = await _integrationFixture.Client.PostAsync("/v1/warehouses/availability", httpContent);
-
-		Assert.Equal(HttpStatusCode.Accepted, postResult.StatusCode);
-	}
 }

@@ -15,7 +15,7 @@ public class InfrastructureModule : IModule
 	public void RegisterModule(WebApplicationBuilder builder)
 	{
 		var mongoSettings = builder.Configuration.GetSection("BrewUp:MongoDbSettings").Get<MongoDbSettings>()!;
-		
+
 		builder.Services.AddMongoDb(mongoSettings);
 		builder.Services.AddEventstoreMongoDb(mongoSettings);
 		builder.Services.AddMongoSagaStateRepository(new MongoSagaStateRepositoryOptions(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
