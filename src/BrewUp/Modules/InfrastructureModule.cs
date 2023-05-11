@@ -19,7 +19,6 @@ public class InfrastructureModule : IModule
 		builder.Services.AddMongoDb(mongoSettings);
 		builder.Services.AddEventstoreMongoDb(mongoSettings);
 		builder.Services.AddMongoSagaStateRepository(new MongoSagaStateRepositoryOptions(mongoSettings.ConnectionString, mongoSettings.DatabaseName));
-
 		builder.Services.AddMufloneEventStore(builder.Configuration["BrewUp:EventStoreSettings:ConnectionString"]!);
 		builder.Services.AddMuflone();
 
