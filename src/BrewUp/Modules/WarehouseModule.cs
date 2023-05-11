@@ -23,19 +23,19 @@ public class WarehouseModule : IModule
 			.Produces(StatusCodes.Status200OK)
 			.WithName("CreateWarehouse");
 
-		mapGroup.MapGet("", WarehouseEndpoints.HandleGetWarehouses)
-			.Produces(StatusCodes.Status400BadRequest)
-			.Produces(StatusCodes.Status200OK)
-			.WithName("GetWarehouses");
+		//mapGroup.MapGet("", WarehouseEndpoints.HandleGetWarehouses)
+		//	.Produces(StatusCodes.Status400BadRequest)
+		//	.Produces(StatusCodes.Status200OK)
+		//	.WithName("GetWarehouses");
 
 		mapGroup.MapPost("/deposit", WarehouseEndpoints.HandleAddBeerDeposit)
 			.Produces(StatusCodes.Status400BadRequest)
 			.Produces(StatusCodes.Status200OK)
 			.WithName("AddBeerDeposit");
 
-		mapGroup.MapGet("/beers", WarehouseEndpoints.HandleGetBeers)
-			.Produces(StatusCodes.Status400BadRequest)
-			.Produces(StatusCodes.Status200OK)
-			.WithName("GetBeers");
+		//mapGroup.MapGet("/beers", WarehouseEndpoints.HandleGetBeers)
+		//	.Produces(StatusCodes.Status400BadRequest)
+		//	.Produces(StatusCodes.Status200OK)
+		//	.WithName("GetBeers");
 	}
 }
