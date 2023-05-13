@@ -12,7 +12,7 @@ namespace Brewup.Modules.Warehouse.Fitness.Tests
 	{
 		private static readonly Architecture Architecture = new ArchLoader().LoadAssemblies(typeof(IWarehouseOrchestrator).Assembly).Build();
 
-		private readonly IObjectProvider<IType> _forbiddenLayer = Types().
+		private readonly IObjectProvider<IType> _forbiddenModule = Types().
 			That().
 			ResideInNamespace("Brewup.Modules.Sales").
 			As("Forbidden Layer");
@@ -22,12 +22,12 @@ namespace Brewup.Modules.Warehouse.Fitness.Tests
 			As("Forbidden Interfaces");
 
 		[Fact]
-		public void WarehouseTypesShouldBeInCorrectLayer()
+		public void WarehouseTypesShouldBeInCorrectModule()
 		{
-			IArchRule forbiddenInterfacesShouldBeInForbiddenLayer =
-				Interfaces().That().Are(_forbiddenInterfaces).Should().Be(_forbiddenLayer);
+			IArchRule forbiddenInterfacesShouldBeInForbiddenModule =
+				Interfaces().That().Are(_forbiddenInterfaces).Should().Be(_forbiddenModule);
 
-			forbiddenInterfacesShouldBeInForbiddenLayer.Check(Architecture);
+			forbiddenInterfacesShouldBeInForbiddenModule.Check(Architecture);
 		}
 	}
 }
