@@ -26,9 +26,9 @@ public static class MongoDbHelper
 				?.GetDatabase(mongoDbParameter.DatabaseName)
 				.WithWriteConcern(WriteConcern.W1));
 
-		services.AddScoped<IPersister, Persister>();
-		//services.AddScoped<IPersister, SalesPersister>();
-		//services.AddScoped<IPersister, WarehousesPersister>();
+		//services.AddScoped<IPersister, Persister>();
+		services.AddScoped<IPersister, SalesPersister>();
+		services.AddScoped<IPersister, WarehousesPersister>();
 
 		return services;
 	}
